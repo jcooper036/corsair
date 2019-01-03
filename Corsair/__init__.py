@@ -7,8 +7,7 @@
 
 
 ## classes
-#from Worldbuilder.Item_cache.Item import Item
-
+from Corsair.Isoform import Isoform
 
 
 ## tables
