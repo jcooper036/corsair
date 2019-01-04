@@ -9,9 +9,6 @@ reference_CDS:corsair/primates/reference_CDS.fasta
 ## this where all the genomes are located
 genome_directory:corsair/primates/genomes/
 
-## list of all the genes to run. They need to be a 1:1 exact match to the names in the ref CDS file.
-gene_list:corsair/primates/gene_list.txt
-
 ## clade tree (newick format). Names don't have to be 4 letters, but they MUST match the prefixes on genome files
 tree:(((((Ptro,Ppan),Hsap),Ggor),((Mfas,Mmul),(Caty,Mleu))),Sbol);
 

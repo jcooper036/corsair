@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
-def sample_ctl():
+def sample_ctl(file):
     """
     Generates a sample control file in the current working directory
     """
-    with open ("sample.ctl", 'w+') as f:
+    with open (file, 'w+') as f:
         f.write(
             "### CTL Example file ###\n\n" +
             "## this is where all the files get stored. This does NOT have to be where the reference files are located, but any created files will go here\n" +
@@ -13,6 +13,8 @@ def sample_ctl():
             "reference_CDS:corsair/primates/reference_CDS.fasta\n\n" +            
             "## this where all the genomes are located\n" +
             "genome_directory:corsair/primates/genomes/\n\n" +
+            "## list of all the genes to run. They need to be a 1:1 exact match to the names in the ref CDS file.\n" +
+            "gene_list:corsair/primates/gene_list.txt\n\n" +            
             "## clade tree (newick format). Names don't have to be 4 letters, but they MUST match the prefixes on genome files\n" +
             "tree:(((((Ptro,Ppan),Hsap),Ggor),((Mfas,Mmul),(Caty,Mleu))),Sbol);\n\n" +  
             "## reference species - in the tree listed above, this is the reference\n" +

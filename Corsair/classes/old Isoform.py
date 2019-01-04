@@ -19,13 +19,24 @@ class Isoform(object):
         self.BEB_sites['same_sites'] = []
         self.ref_min_aa = {}
 
+    def rename(self, newname):
+        ## renames the isoform
+        self.name = newname
+
+    def link_parent(self):
+        ## used to link an isoform with a parent gene
+        self.parent_gene = self.name.split('_')[0]
+
     def ref_nt(self, ref_nt):
         # nt_seq must be a string. also as is, this can't be over-written
         self.ref_nt = ref_nt
 
-    def ref_aa(self, ref_aa):
-        # nt_seq must be a string. also as is, this can't be over-written
-        self.ref_aa = ref_aa
+    def translate(self):
+        # translates the nt_seq if there is one
+        try:
+            self.ref_aa = trans(self.ref_nt)
+        except:
+            print("ERROR: There is no nucleotide sequence for this gene")
 
     def scaffold_assignment(self, file1):
         with open(file1, 'rb') as input:

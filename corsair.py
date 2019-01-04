@@ -1,37 +1,18 @@
 #!/usr/bin/env python3
 import Corsair as cor
 
+sample_ctl = '/Users/Jacob/corsair/Corsair/test_files/ctl_test.txt'
 
-ctl = cor.load_ctl('/Users/Jacob/corsair/sample.ctl')
-print(ctl)
+## parse the ctl file
+ctl = cor.load_ctl(sample_ctl)
 
+## for the first time
+cor.corsair_initialize(ctl)
 
+iso = 'gene1'
 
+## run all the execs on a gene by gene basis - allows for parallelizing this part
+cor.corsair_execs(ctl, iso)
 
-
-def full_send():
-    """
-    Temporary def, for practicing doing everything. Need to keep in mind that variable 
-    passing needs to be such that everything can be run by itself, and not kill memory,
-    and be divided onto as many CPUS as possible, and it needs to be able to quit and
-    not lose everything.
-    """
-        
-    ## parse the ctl file
-
-    ## load all the reference CDS sequences
-    
-    ## blast
-
-    ## parse the blast results into scaffolds
-
-    ## exonerate on the scaffolds
-
-    ## align
-
-    ## build the tree
-
-    ## run PAML
-
-    ## manage results
-    pass
+## run all the results gathering functions for the whole gene list
+cor.corsair_results(ctl, iso)

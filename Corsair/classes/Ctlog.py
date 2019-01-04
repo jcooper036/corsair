@@ -50,7 +50,9 @@ class Ctlog():
                         self.align_thresh = 1
                     elif self.align_thresh < 0.7:
                         print("The minimum alignment threshold cannot be less than 0.7. It has been set to 0.7.")
-                        self.align_thresh = 0.7              
+                        self.align_thresh = 0.7
+                if "gene_list:" in line:
+                    self.gene_list = line.split(':')[1]            
         
         self.species_list(self.tree)
 

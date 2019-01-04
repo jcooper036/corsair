@@ -19,16 +19,17 @@ pip install foobar
 
 ## Pre-run requirements
 - Control file
-    - fill out a control file. A sample control file can be generated in the working directory with:
+    - fill out a control file. A sample control file:
 
 ```python
 import Corsair as cor
-cor.sample_ctl()
+cor.sample_ctl(file_name)
 ```
 
-- Parse reference CDS Fasta file
+- Parse reference CDS Fasta file and gene list
     - the reference CDS file needs to contain ONLY the gene or transcript name in the header
-    - for some tools to do this, see: 
+    - genes in the gene list must EXACTLY match a header in the fasta file
+    - for some tools to do this, see:
 - Genome names need to match the clade names in the tree, followed by _
     - the genome name has to fit the exact (case sensitve) name give in the tree
 

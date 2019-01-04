@@ -41,5 +41,14 @@ def load_ctl(file):
     if not os.path.exists(ctl.ref_cds):
         print("ERROR: Could not find the reference CDS fasta file")
         return "Aborting"
+    
+    print('Checking for the gene list')
+    if not os.path.exists(ctl.gene_list):
+        print("ERROR: Could not find the gene list file")
+        return "Aborting"
+
+    ## makes a folder for the genes if that doesn't exit
+    if not os.path.isdir(ctl.project_path + 'genes/'):
+        os.mkdir(ctl.project_path + 'genes/')
 
     return ctl
