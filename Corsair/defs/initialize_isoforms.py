@@ -33,7 +33,7 @@ def initialize_isoforms(ctl):
             isoforms[iso].ref_aa(cor.translate(isoforms[iso].ref_nt))
             if not os.path.isdir(ctl.project_path + 'genes/' + iso):
                 os.mkdir(ctl.project_path + 'genes/' + iso)
-            print(isoforms[iso])
+            
 
         ## if not, add it to the list of problems
         else:

@@ -18,3 +18,6 @@ from Corsair.defs.load_ctl import load_ctl
 from Corsair.defs.initialize_isoforms import initialize_isoforms
 from Corsair.defs.load_isoform import load_isoform
 from Corsair.defs.save_isoform import save_isoform
+
+## exec definitions
+from Corsair.exec_defs.run_blast import run_blast

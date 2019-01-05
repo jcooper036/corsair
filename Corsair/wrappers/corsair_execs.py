@@ -14,7 +14,8 @@ def corsair_execs(ctl, iso):
     """
 
     ## blast
-    
+    cor.run_blast(ctl, iso)
+
     ## parse the blast results into scaffolds
 
     ## exonerate on the scaffolds

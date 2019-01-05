@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import glob
 
 class Ctlog():
     """This class is the equivalent of a control file, holds all the parameters for
@@ -55,6 +56,7 @@ class Ctlog():
                     self.gene_list = line.split(':')[1]            
         
         self.species_list(self.tree)
+        self.find_genome_paths()
 
     def add_slash(self, string):
         """looks for '/' on the end of string, add it if not there"""
@@ -67,3 +69,11 @@ class Ctlog():
         self.species = self.tree.split(',')
         ## replace all the "(", ")", and ";" to leave only species IDs
         self.species = [x.replace('(','').replace(')','').replace(';','') for x in self.species]
+
+    def find_genome_paths(self):
+        """Looks in the genome folder, gets the exact file paths to the different genomes"""
+        self.genome_paths = []
+        for genome in self.species:
+            for name in glob.glob(self.genome_path + genome + '_*.fasta'):
+                gen = name
+            self.genome_paths.append(gen)

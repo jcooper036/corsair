@@ -17,9 +17,9 @@ To install the package, run pip:
 pip install foobar
 ```
 
-## Pre-run requirements
+## Pre-run requirements -- IMPORTANT!
 - Control file
-    - fill out a control file. A sample control file:
+    - fill out a control file. To generate a sample control file:
 
 ```python
 import Corsair as cor
@@ -30,8 +30,10 @@ cor.sample_ctl(file_name)
     - the reference CDS file needs to contain ONLY the gene or transcript name in the header
     - genes in the gene list must EXACTLY match a header in the fasta file
     - for some tools to do this, see:
-- Genome names need to match the clade names in the tree, followed by _
+
+- Genome names need to match the clade names in the tree, followed by '_', and need to end as .fasta
     - the genome name has to fit the exact (case sensitve) name give in the tree
+    - ex: Hsapiens_GRCH36.fasta
 
 ## Usage
 Corsair requires a control file to be executed. build the ctl object with the following:

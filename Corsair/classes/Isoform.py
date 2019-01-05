@@ -12,20 +12,29 @@ class Isoform(object):
     #################
 
     def __init__(self, name):
+        """constructor function"""
         self.name = name
         self.alignment = {}
         self.backtrans = {}
         self.BEB_sites = {}
         self.BEB_sites['same_sites'] = []
         self.ref_min_aa = {}
+        self.scaffolds = {}
 
     def ref_nt(self, ref_nt):
-        # nt_seq must be a string. also as is, this can't be over-written
+        """Adds the reference nucleotide string"""
         self.ref_nt = ref_nt
 
     def ref_aa(self, ref_aa):
-        # nt_seq must be a string. also as is, this can't be over-written
+        """Adds the reference amino acid string"""
         self.ref_aa = ref_aa
+
+    def add_scaffold(self, species, scaffold):
+        """Add a scaffold"""
+        self.scaffolds[species] = scaffold
+
+
+
 
     def scaffold_assignment(self, file1):
         with open(file1, 'rb') as input:
