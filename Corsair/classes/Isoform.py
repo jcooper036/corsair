@@ -71,6 +71,19 @@ class Isoform(object):
         except:
             print('Need to specify and aligner')
 
+    def tree_file(self, ctl):
+        ## returns the tree file path
+        return self.iso_files(ctl) + self.name + '_tree.txt'
+    
+    def results_file(self, ctl):
+        try:
+            return ctl.project_path + 'genes/' + self.name + '/' + self.name + '_results.txt'
+        except:
+            print('Could not properly specifiy results file')
+    
+    def paml_control_file(self, ctl):
+        return self.iso_files(ctl)  + 'codeml.ctl'
+
     #################
     ## these are used in the processing of the data
     #################
@@ -104,9 +117,6 @@ class Isoform(object):
     ## to delete below
     #################
 
-    def tree_file(self):
-        ## returns the tree file path
-        return self.name + '/' + self.name + '_files/' + self.name + '_tree.txt'
 
     def paml_output(self, algnr):
         ## returns the file path for the paml output file for a given aligner
@@ -121,14 +131,6 @@ class Isoform(object):
             return self.name + '/' + self.name + '_files/' + self.name + '_' + algnr + '_M8a_PAML_out_full.txt'
         except:
             print('Need to specify and aligner')
-
-    def results_file(self):
-        try:
-            return self.name + '/results.txt'
-        except:
-            print('Could not properly specifiy results file')
-
-
 
     def load_alignment(self, aligner, file1):
         ## gives .aln property, which is a dictionary containing aligner names that are in turn dictionaries with alignments

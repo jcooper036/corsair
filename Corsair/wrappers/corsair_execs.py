@@ -23,11 +23,17 @@ def corsair_execs(ctl, iso):
     ## align
     aligner = 'clustal'
     cor.run_alignment(ctl, iso, aligner)
+    
+    ## back translate
     cor.back_translate(ctl, iso, aligner)
 
     ## build the tree
+    cor.build_tree(ctl, iso)
 
     ## run PAML
+    cor.run_paml_M7M8(ctl, iso, aligner)
+
+    ## load PAML results
 
     ## check p-value
 
