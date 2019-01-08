@@ -3,6 +3,7 @@
 import os
 import pickle
 from scipy.stats import chi2
+import Corsair as cor
 
 class Isoform(object):
     """Holds information about an isoform"""
@@ -14,12 +15,18 @@ class Isoform(object):
     def __init__(self, name):
         """constructor function"""
         self.name = name
-        self.alignment = {}
-        self.backtrans = {}
-        self.BEB_sites = {}
-        self.BEB_sites['same_sites'] = []
-        self.ref_min_aa = {}
-        self.scaffolds = {}
+        self.alignment = {} # protein alignment with all good speices
+        self.backtrans = {} # back translanted CDS sequecnes for each species with indels removed
+        self.BEB_sites = {} # aligner : list of BEB sites
+        self.BEB_sites['same_sites'] = [] # List of sites that are common between all aligners
+        self.ref_min_aa = {} # the minimum amino acid sequence of the reference after all indels compared with other species are removed
+        self.scaffolds = {} # species:scaffold, filled after blast
+        self.good_species = [] # eventually filled with the species that have good sequences
+        
+    #################
+    ## defs for explicity adding varibles
+    ## mostly to increase readability
+    #################
 
     def ref_nt(self, ref_nt):
         """Adds the reference nucleotide string"""
@@ -33,44 +40,69 @@ class Isoform(object):
         """Add a scaffold"""
         self.scaffolds[species] = scaffold
 
-
-
-
-    def scaffold_assignment(self, file1):
-        with open(file1, 'rb') as input:
-            scaffold_dic = pickle.load(input)
-        self.scaffolds = scaffold_dic[self.parent_gene.replace('-a-','.')]
-
     #################
     ## these are some property functions to return common file paths
     ## they help make the handling of everything else much more readable
     #################
 
-    def iso_files(self):
-        ## returns the path to the files folder
-        return self.name + '/' + self.name + '_files/'
+    def iso_files(self, ctl):
+        """Input : control object, Output, path to files folder for isoform"""
+        return ctl.project_path + 'genes/' + self.name + '/' + self.name + '_files/'
 
-    def CDS_file(self):
-        ## returns the cds_file path
-        return self.name + '/' + self.name + '_files/' + self.name + '_CDS.txt'
-
-    def prot_file(self):
+    def protein_file(self, ctl):
         ## returns the protein file path
-        return self.name + '/' + self.name + '_files/' + self.name + '_prot.txt'
+        return self.iso_files(ctl) + self.name + '_prot.txt'
 
-    def alignment_file(self, algnr):
-        ## returns the file path with the specified alinger
+    def CDS_file(self, ctl):
+        ## returns the cds_file path
+        return self.iso_files(ctl) + self.name + '_CDS.txt'
+
+    def alignment_file(self, ctl, algnr):
+        """Takes control object and alinger name, returns a file path"""
         try:
-            return self.name + '/' + self.name + '_files/' + self.name + '_' + algnr + '.fasta'
+            return self.iso_files(ctl) + self.name + '_' + algnr + '.fasta'
         except:
             print('Need to specify an aligner')
 
-    def paml_file(self, algnr):
+    def paml_file(self, ctl, algnr):
         ## returns the paml alignment file path
         try:
-            return self.name + '/' + self.name + '_files/' + self.name + '_' + algnr + '.paml'
+            return self.iso_files(ctl) + self.name + '_' + algnr + '.paml'
         except:
             print('Need to specify and aligner')
+
+    #################
+    ## these are used in the processing of the data
+    #################
+
+    def blast_search(self, blast_dic):
+        """Adds in a dictionary of species:nt_sequecnes from blast and exonerate"""
+        self.blast_dic = blast_dic
+
+    def blast_trans(self):
+        """Translates self.blast_dic into protein sequences, stored in self.blast_prot"""
+        try:
+            self.blast_prot = {}
+            for key in self.blast_dic:
+                self.blast_prot[key] = cor.translate(self.blast_dic[key])
+        except:
+            print("ERROR: There is no blast dictionary")
+    
+    def stop_codon_prune(self):
+        """Removes sequences that have stop codons in the middle of the sequence"""
+        remove = []
+        for species in self.blast_prot:
+            test = self.blast_prot[species].upper()[:-1]
+            if 'X' in test:
+                remove.append(species)
+        if len(remove) > 0:
+            for species in remove:
+                self.blast_dic.pop(species)
+                self.blast_prot.pop(species)
+
+    #################
+    ## to delete below
+    #################
 
     def tree_file(self):
         ## returns the tree file path
@@ -96,22 +128,7 @@ class Isoform(object):
         except:
             print('Could not properly specifiy results file')
 
-    #################
-    ## these are used in the processing of the data
-    #################
 
-    def blast_search(self, blast_dic):
-        # reads in a dicitonary of species:sequence pairs
-        self.blast_dic = blast_dic
-
-    def blast_trans(self):
-        # translates the blast dicitonary
-        try:
-            self.blast_prot = {}
-            for key in self.blast_dic:
-                self.blast_prot[key] = trans(self.blast_dic[key])
-        except:
-            print("ERROR: There is no blast dictionary")
 
     def load_alignment(self, aligner, file1):
         ## gives .aln property, which is a dictionary containing aligner names that are in turn dictionaries with alignments

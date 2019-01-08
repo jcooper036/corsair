@@ -2,17 +2,13 @@
 
 import Corsair as cor
 import os
-import subprocess
-
-def shell(command):
-    return subprocess.check_output(command, shell=True, executable='/bin/bash')
 
 def run_blast(ctl, iso_name):
     """
     Input: ctl file, isoform name
     Output: blast scaffold data in the isform file
     """
-    
+
     ## load the iso object
     iso = cor.load_isoform(ctl, iso_name)
 
@@ -22,24 +18,22 @@ def run_blast(ctl, iso_name):
         return None
     
     ## check if the BLAST database has been made, make it if not
-    for genome in ctl.genome_paths:
+    for species in ctl.genome_paths:
+        genome = ctl.genome_paths[species]
         if not os.path.exists(genome + '.nhr'):
             print("UPDATE: making BLAST database for " + genome)
             command = 'makeblastdb -in ' + genome + ' -parse_seqids -dbtype nucl'
-            shell(command)
+            cor.shell(command)
         if not os.path.exists(genome + '.fai'):
             print("UPDATE: making faidx database for " + genome)
             command = 'samtools faidx ' + genome
-            shell(command)
+            cor.shell(command)
 
     ## run blast - output is a scaffold file in the gene folder. iso object knows them too
-    for species in ctl.species:
-        for genome in ctl.genome_paths:
-            if species in genome:
-                command = 'tblastn -outfmt "6 sseqid" -query <(echo ' + iso.ref_aa + ') -db ' + genome + ' -max_target_seqs 1| head -n 1'
-                var = str(shell(command))
-                var = var.lstrip("b'").rstrip("\\n'")
-                iso.add_scaffold(species, var)
+    for species in ctl.genome_paths:
+        command = 'tblastn -outfmt "6 sseqid" -query <(echo ' + iso.ref_aa + ') -db ' + ctl.genome_paths[species] + ' -max_target_seqs 1| head -n 1'
+        scaffold = str(cor.shell(command))
+        iso.add_scaffold(species, scaffold)
 
     ## save the iso object
     cor.save_isoform(ctl, iso)

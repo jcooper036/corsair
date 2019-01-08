@@ -53,7 +53,12 @@ class Ctlog():
                         print("The minimum alignment threshold cannot be less than 0.7. It has been set to 0.7.")
                         self.align_thresh = 0.7
                 if "gene_list:" in line:
-                    self.gene_list = line.split(':')[1]            
+                    self.gene_list = []
+                    self.gene_file = line.split(':')[1]
+                    with open(self.gene_file, 'r') as f:
+                        for line in f.readlines():
+                            self.gene_list.append(line.strip())
+                    print(self.gene_list)
         
         self.species_list(self.tree)
         self.find_genome_paths()
@@ -69,11 +74,16 @@ class Ctlog():
         self.species = self.tree.split(',')
         ## replace all the "(", ")", and ";" to leave only species IDs
         self.species = [x.replace('(','').replace(')','').replace(';','') for x in self.species]
+        temp = []
+        for species in self.species:
+            if species != self.ref_species:
+                temp.append(species)
+        self.species = temp
 
     def find_genome_paths(self):
         """Looks in the genome folder, gets the exact file paths to the different genomes"""
-        self.genome_paths = []
+        self.genome_paths = {}
         for genome in self.species:
             for name in glob.glob(self.genome_path + genome + '_*.fasta'):
                 gen = name
-            self.genome_paths.append(gen)
+            self.genome_paths[genome] = gen

@@ -43,7 +43,7 @@ def load_ctl(file):
         return "Aborting"
     
     print('Checking for the gene list')
-    if not os.path.exists(ctl.gene_list):
+    if not os.path.exists(ctl.gene_file):
         print("ERROR: Could not find the gene list file")
         return "Aborting"
 

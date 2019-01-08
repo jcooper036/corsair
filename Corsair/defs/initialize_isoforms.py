@@ -13,7 +13,7 @@ def initialize_isoforms(ctl):
 
     ## load the list of isoforms
     iso_list = []
-    with open(ctl.gene_list, 'r') as f:
+    with open(ctl.gene_file, 'r') as f:
         for line in f.readlines():
             line = line.strip()
             if len(line) > 0:

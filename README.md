@@ -4,12 +4,17 @@ v1.00
 
 ## Installation
 
-Corsair comes with several of the decencies it needs to run. Namely:
+Corsair comes with several of the decencies it needs to run. So that the program can be run in a distributed manner, the /bin/ of this module actually has all the depenecies.
 - tBlastn
-- Exonerate
+- samtools faidx
 - Mafft
-- Tcoffee
 - Clustal Omega
+- Exonerate
+- Tcoffee
+
+If you would like to use a local version instead, then these are the files that you need to alter:
+- Corsair/exec_defs/run_blast.py
+Look for the subprocess commands, change the executable path to whatever you like.
 
 
 To install the package, run pip:

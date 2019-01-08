@@ -14,16 +14,25 @@ def corsair_execs(ctl, iso):
     """
 
     ## blast
-    cor.run_blast(ctl, iso)
-
-    ## parse the blast results into scaffolds
+    # cor.run_blast(ctl, iso)
 
     ## exonerate on the scaffolds
-
+    # cor.run_exonerate(ctl, iso)
+    cor.load_species_sequences(ctl, iso)
+    
     ## align
+    aligner = 'clustal'
+    cor.run_alignment(ctl, iso, aligner)
+    cor.back_translate(ctl, iso, aligner)
 
     ## build the tree
 
     ## run PAML
+
+    ## check p-value
+
+    ## run aligners and PAML again if necessary
+
+    ## run M8-M8a if necessary
 
     pass
