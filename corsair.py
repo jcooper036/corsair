@@ -2,6 +2,7 @@
 import Corsair as cor
 
 sample_ctl = '/Users/Jacob/corsair/primates/primates.ctl'
+aligner = 'muscle'
 
 ## parse the ctl file
 ctl = cor.load_ctl(sample_ctl)
@@ -13,9 +14,15 @@ cor.corsair_initialize(ctl)
 for iso in ctl.gene_list:
 
     ## run all the execs on a gene by gene basis - allows for parallelizing this part
-    cor.corsair_execs(ctl, iso)
+    cor.corsair_execs(ctl, iso, aligner)
 
-    ## run all the results gathering functions for the whole gene list
-    cor.corsair_results(ctl, iso)
+    # # just do blast and exonerate
+    # cor.blast_and_exonerate(ctl, iso)
+
+    # # just do the alignment and PAML (if Blast and Exonerate are already done)
+    # cor.align_and_paml(ctl, iso, aligner)
+
+    # ## run all the results gathering functions for the whole gene list
+    # cor.corsair_results(ctl, iso)
 
 

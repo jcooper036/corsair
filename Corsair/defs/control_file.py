@@ -5,12 +5,14 @@ def m7_m8_control_file(ctl, iso, aligner):
     Input: control object, iso object, aligner name
     Output: Writes a PAML control file to that file
     """
-
+    output_file = iso.iso_files(ctl) + iso.name + '_' + aligner + '_PAML_output.txt'
+    iso.paml_output_files[aligner] = output_file
+    
     ## Write/rewrite control file
     with open(iso.paml_control_file(ctl), 'w') as f:
         f.write('seqfile = ' + iso.iso_files(ctl) + iso.name + '_' + aligner +'.paml \n')
         f.write('treefile = ' + iso.iso_files(ctl) + iso.name + '_tree.txt \n')
-        f.write('outfile = ' + iso.iso_files(ctl) + iso.name + '_' + aligner + '_PAML_output.txt \n')
+        f.write('outfile = ' + output_file + ' \n')
         f.write('noisy = 3 \n')
         f.write('verbose = 1 \n')
         f.write('runmode = 0 \n')
@@ -42,6 +44,9 @@ def m8_m8a_control_file(file):
     Input: File name, isoform name, aligner name
     Output: Writes a PAML control file to that file
     """
+    output_file = iso.iso_files(ctl) + iso.name + '_' + aligner + '_PAML_M8a_output.txt'
+    iso.paml_output_file['M8'] = output_file
+
     #Write/rewrite control file
     with open(iso.paml_control_file(ctl), 'w') as f:
         f.write('seqfile = ' + iso.iso_files(ctl) + iso.name + '_' + aligner +'.paml \n')

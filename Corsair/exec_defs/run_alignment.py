@@ -17,17 +17,16 @@ def run_alignment(ctl, iso_name, aligner):
     outfile = iso.alignment_file(ctl, aligner)
 
     ## make the file
-    cor.write_fasta(infile, iso.blast_prot)
+    cor.write_fasta(infile, iso.blast_prot, list(iso.blast_prot.keys()))
 
     ## different commands based on aligner
     if aligner == 'clustal':
-        command = 'clustalo -i ' + infile +' -o ' + outfile + ' --force'
+        command = 'corsair/Corsair/bin/clustal-omega/1.2.1/bin/clustalo -i ' + infile +' -o ' + outfile + ' --force'
     
     if aligner == 'tcoffee':
-        command = 't_coffee ' + infile + ' -outfile ' + outfile + ' -multi_core -quiet -output=fasta'
-    
+        command = 'corsair/Corsair/bin/t-coffee/10.00.r1613/bin/t_coffee ' + infile + ' -outfile ' + outfile + ' -multi_core -quiet -output=fasta'
     if aligner == 'muscle':
-        command = 'muscle -quiet -in ' + infile + ' -out ' + outfile
+        command = 'corsair/Corsair/bin/muscle/3.8.1551/bin/muscle -quiet -in ' + infile + ' -out ' + outfile
     
     cor.shell(command)
     print('Sequences for ' + iso.name + ' aligned with ' + aligner + '.')

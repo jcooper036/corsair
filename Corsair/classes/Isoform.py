@@ -22,7 +22,19 @@ class Isoform(object):
         self.ref_min_aa = {} # the minimum amino acid sequence of the reference after all indels compared with other species are removed
         self.scaffolds = {} # species:scaffold, filled after blast
         self.good_species = [] # eventually filled with the species that have good sequences
-        
+        self.paml_results = {
+            'clustal' : False,
+            'tcoffee' : False,
+            'muscle' : False,
+            'M8' : False
+        } # will hold the results for each run of PAML. keys are
+        self.paml_output_files = {
+            'clustal' : False,
+            'tcoffee' : False,
+            'muscle' : False,
+            'M8' : False            
+        } # will hold the results paths for each run of PAML. keys are
+
     #################
     ## defs for explicity adding varibles
     ## mostly to increase readability

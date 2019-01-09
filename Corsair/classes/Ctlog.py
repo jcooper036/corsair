@@ -58,7 +58,6 @@ class Ctlog():
                     with open(self.gene_file, 'r') as f:
                         for line in f.readlines():
                             self.gene_list.append(line.strip())
-                    print(self.gene_list)
         
         self.species_list(self.tree)
         self.find_genome_paths()

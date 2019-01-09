@@ -9,6 +9,8 @@ from Corsair.classes.Ctlog import Ctlog
 from Corsair.wrappers.corsair_initialize import corsair_initialize
 from Corsair.wrappers.corsair_execs import corsair_execs
 from Corsair.wrappers.corsair_results import corsair_results
+from Corsair.wrappers.blast_and_exonerate import blast_and_exonerate
+from Corsair.wrappers.align_and_paml import align_and_paml
 
 ## definintions
 from Corsair.defs.translate import translate
@@ -29,4 +31,4 @@ from Corsair.exec_defs.load_species_sequences import load_species_sequences
 from Corsair.exec_defs.run_alignment import run_alignment
 from Corsair.exec_defs.back_translate import back_translate
 from Corsair.exec_defs.build_tree import build_tree
-from Corsair.exec_defs.run_paml import run_paml_M7M8
+from Corsair.exec_defs.run_paml import run_paml_M7M8, run_paml_M8M8a

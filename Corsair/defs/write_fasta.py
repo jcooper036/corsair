@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 
-def write_fasta(file, fasta_dict):
-    """Writes a protein sequence to a file in fasta format"""
+def write_fasta(file, fasta_dict, order):
+    """
+    Input: file name, fasta dictionary, sequence order (keys from dictionary)
+    Ouput: FASTA formated file
+    """
     with open(file, 'w+') as f:
-        for key in fasta_dict:
+        for key in order:
             f.write('>' + key + '\n')
             total_length = len(fasta_dict[key])
             total_count = 0

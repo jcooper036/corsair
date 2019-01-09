@@ -11,6 +11,8 @@ def run_exonerate(ctl, iso_name):
     ## load the isoform object
     iso = cor.load_isoform(ctl, iso_name)
 
+    print('Running exonerate for ' + iso.name)
+
     ## check that the temp directory exists
     temp_dir = ctl.project_path + 'temp/'
     if not os.path.isdir(temp_dir):
@@ -19,11 +21,8 @@ def run_exonerate(ctl, iso_name):
         os.mkdir(iso.iso_files(ctl))  
 
     ## write the protein sequence
-    cor.write_fasta(iso.protein_file(ctl), ctl.ref_species, iso.ref_aa)      
-
-    ## check that there is a scaffold present
-    
-    ## check that the scaffold name is is in the .fai file
+    temp = {ctl.ref_species : iso.ref_aa}
+    cor.write_fasta(iso.protein_file(ctl), temp, [ctl.ref_species])
 
     ############ run exonerate
     # iterate over the list of scaffolds from each species

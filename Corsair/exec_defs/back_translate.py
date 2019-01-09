@@ -45,9 +45,13 @@ def back_translate(ctl, iso_name, aligner):
     iso.backtrans[aligner] = nuc_input
 
     ## write the .paml file
+    order = [ctl.ref_species]
+    for species in iso.good_species:
+        if species != ctl.ref_species:
+            order.append(species)
     with open(iso.paml_file(ctl, aligner), 'w') as f:
         f.write('\t' + str(len(nuc_input.keys())) + '\t' + str(len(nuc_input[ctl.ref_species])) + '\n') ## changed to 'clade' variable
-        for key in nuc_input:
+        for key in order:
             f.write(str(key) + '\n')
             f.write(str(nuc_input[key]) + '\n')
     

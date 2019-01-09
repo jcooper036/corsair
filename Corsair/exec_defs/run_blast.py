@@ -12,6 +12,8 @@ def run_blast(ctl, iso_name):
     ## load the iso object
     iso = cor.load_isoform(ctl, iso_name)
 
+    print('Running tBLASTn for ' + iso.name)
+
     ## check that the isoform has the appropriate data
     if not type(iso.ref_nt) == str:
         print("ERROR: Isoform object was not prepared for BLAST - no reference protein sequence")

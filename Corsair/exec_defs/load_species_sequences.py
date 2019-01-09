@@ -71,8 +71,13 @@ def load_species_sequences(ctl, iso_name):
     ## now let the isoform know what species it can actually use
     iso.good_species = list(iso.blast_dic.keys())
 
-    ## write a CDS outfile. needed for tree building
-    cor.write_fasta(iso.CDS_file(ctl), iso.blast_dic)
+    ## write a CDS outfile. needed for tree building. Done this way so that the reference
+    ## species will be the first
+    order = [ctl.ref_species]
+    for species in iso.good_species:
+        if species != ctl.ref_species:
+            order.append(species)
+    cor.write_fasta(iso.CDS_file(ctl), iso.blast_dic, order)
 
     ## save the isoform object
     cor.save_isoform(ctl, iso)
