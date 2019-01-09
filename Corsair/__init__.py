@@ -7,7 +7,7 @@ from Corsair.classes.Ctlog import Ctlog
 
 ## wrapper definintions
 from Corsair.wrappers.corsair_initialize import corsair_initialize
-from Corsair.wrappers.corsair_execs import corsair_execs
+from Corsair.wrappers.corsair_execs import align_and_m7m8, run_m8m8a
 from Corsair.wrappers.corsair_results import corsair_results
 from Corsair.wrappers.blast_and_exonerate import blast_and_exonerate
 from Corsair.wrappers.align_and_paml import align_and_paml
@@ -23,6 +23,9 @@ from Corsair.defs.load_isoform import load_isoform
 from Corsair.defs.save_isoform import save_isoform
 from Corsair.defs.shell import shell
 from Corsair.defs.control_file import m7_m8_control_file, m8_m8a_control_file
+from Corsair.defs.highest_pvalue import highest_pvalue
+from Corsair.defs.read_paml_output import read_paml_output
+from Corsair.defs.build_gene_lists import build_gene_lists
 
 ## exec definitions
 from Corsair.exec_defs.run_blast import run_blast

@@ -2,15 +2,10 @@
 
 import Corsair as cor
 
-def corsair_execs(ctl, iso, aligner):
+def align_and_m7m8(ctl, iso, aligner):
     """
     Input: control object, isoform name
-    Output: results in the isoform folder in the project directory
-    
-    Temporary def, for practicing doing everything. Need to keep in mind that variable 
-    passing needs to be such that everything can be run by itself, and not kill memory,
-    and be divided onto as many CPUS as possible, and it needs to be able to quit and
-    not lose everything.
+    Output: PAML output results in the isoform folder in the project directory
     """
 
     ## blast
@@ -32,10 +27,10 @@ def corsair_execs(ctl, iso, aligner):
     ## run PAML
     cor.run_paml_M7M8(ctl, iso, aligner)
 
-    ## load PAML results
+def run_m8m8a(ctl, iso, aligner):
+    
+    ## figure out which aligner to use
+    alinger = cor.highest_pvalue(ctl, iso)
 
-    ## check p-value
-
-    ## run aligners and PAML again if necessary
-
-    ## run M8-M8a if necessary
+    ## run PAML
+    cor.run_paml_M8M8a(ctl, iso, aligner)

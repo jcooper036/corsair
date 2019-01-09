@@ -2,27 +2,52 @@
 import Corsair as cor
 
 sample_ctl = '/Users/Jacob/corsair/primates/primates.ctl'
-aligner = 'muscle'
+## list the different aligners to loop over
+aligners = ['clustal', 'tcoffee', 'muscle', 'M8'] #@ add this to the ctl file
+restart = False
 
 ## parse the ctl file
 ctl = cor.load_ctl(sample_ctl)
 
 ## for the first time only - will over-write saves otherwise
-cor.corsair_initialize(ctl)
+if restart:
+    cor.corsair_initialize(ctl)
 
-## loop through the gene list
-for iso in ctl.gene_list:
+## build the lists of different genes to run for each category
+ctl = cor.build_gene_lists(ctl, aligners)
 
-    ## run all the execs on a gene by gene basis - allows for parallelizing this part
-    cor.corsair_execs(ctl, iso, aligner)
+## while there is anything left to do
+for i in range(len(aligners) + 1):
+    
+    ## for each aligner
+    for aligner in aligners:
+        
+        ## for each gene in that list
+        for iso in ctl.gene_list[aligner]:
 
-    # # just do blast and exonerate
-    # cor.blast_and_exonerate(ctl, iso)
+            ## run all the execs on a gene by gene basis - allows for parallelizing this part
+            # cor.align_and_m7m8(ctl, iso, aligner)
 
-    # # just do the alignment and PAML (if Blast and Exonerate are already done)
-    # cor.align_and_paml(ctl, iso, aligner)
+            # # just do blast and exonerate
+            if restart:
+                cor.blast_and_exonerate(ctl, iso, aligner)
 
-    # ## run all the results gathering functions for the whole gene list
-    # cor.corsair_results(ctl, iso)
+            # # just do the alignment and PAML (if Blast and Exonerate are already done)
+            if restart:
+                cor.align_and_paml(ctl, iso, aligner)
+
+            # ## run all the results gathering functions for the whole gene list
+            cor.read_paml_output(ctl, iso, aligner)
+    
+    ## remake the aligners 'to do' lists
+    ctl = cor.build_gene_lists(ctl, aligners)
+
+## standard data output for all genes
+for iso in ctl.gene_list['all']:
+    cor.corsair_results(ctl, iso)
+
+    ## load the isoform object
+    iso = cor.load_isoform(ctl, iso)
+    print(iso.paml_results)
 
 

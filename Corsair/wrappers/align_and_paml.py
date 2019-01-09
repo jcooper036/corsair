@@ -24,11 +24,3 @@ def align_and_paml(ctl, iso, aligner):
 
     ## run PAML
     cor.run_paml_M7M8(ctl, iso, aligner)
-
-    ## load PAML results
-
-    ## check p-value
-
-    ## run aligners and PAML again if necessary
-
-    ## run M8-M8a if necessary

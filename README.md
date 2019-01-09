@@ -5,19 +5,26 @@ v1.00
 ## Installation
 
 Corsair comes with several of the decencies it needs to run. So that the program can be run in a distributed manner, the /bin/ of this module actually has all the depenecies.
-- tBlastn
-- samtools faidx
-- Mafft
+- mafft
 - Clustal Omega
 - Exonerate
 - Tcoffee
+- Muscle
+- paml
 
-If you would like to use a local version instead, then these are the files that you need to alter:
-- Corsair/exec_defs/run_blast.py
-Look for the subprocess commands, change the executable path to whatever you like.
+Some programs need to be present locally. They should be available to install with brew or apt-get
+- blast (specifically tblastn)
+- samtools faidx
+- python3
+
+There are also some python packages that are requied, but are easy to find with pip. Hopefully we didn't miss any - if any "cannot find module" error pop up, try installing that python module.
+- subprocess
+- scipy
+- numpy
+- pickle
 
 
-To install the package, run pip:
+To install this package, run pip:
 ```bash
 pip install foobar
 ```

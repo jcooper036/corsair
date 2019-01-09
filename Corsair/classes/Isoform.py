@@ -35,6 +35,7 @@ class Isoform(object):
             'M8' : False            
         } # will hold the results paths for each run of PAML. keys are
 
+
     #################
     ## defs for explicity adding varibles
     ## mostly to increase readability
