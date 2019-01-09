@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
 import Corsair as cor
 
-sample_ctl = '/Users/Jacob/corsair/primates/primates.ctl'
-## list the different aligners to loop over
-aligners = ['clustal', 'tcoffee', 'muscle', 'M8'] #@ add this to the ctl file
 restart = False
+sample_ctl = '/Users/Jacob/corsair/primates/primates.ctl'
 
 ## parse the ctl file
 ctl = cor.load_ctl(sample_ctl)
@@ -14,13 +12,13 @@ if restart:
     cor.corsair_initialize(ctl)
 
 ## build the lists of different genes to run for each category
-ctl = cor.build_gene_lists(ctl, aligners)
+ctl = cor.build_gene_lists(ctl)
 
 ## while there is anything left to do
-for i in range(len(aligners) + 1):
+for i in range(len(ctl.aligners) + 1):
     
     ## for each aligner
-    for aligner in aligners:
+    for aligner in ctl.aligners:
         
         ## for each gene in that list
         for iso in ctl.gene_list[aligner]:
@@ -40,7 +38,7 @@ for i in range(len(aligners) + 1):
             cor.read_paml_output(ctl, iso, aligner)
     
     ## remake the aligners 'to do' lists
-    ctl = cor.build_gene_lists(ctl, aligners)
+    ctl = cor.build_gene_lists(ctl)
 
 ## standard data output for all genes
 for iso in ctl.gene_list['all']:
