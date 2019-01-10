@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import glob
+import sys
 
 class Ctlog():
     """This class is the equivalent of a control file, holds all the parameters for
@@ -18,9 +19,13 @@ class Ctlog():
 
     def load_params(self):
         """loads in the parameters from it's ctl file"""
+
         with open(self.file, 'r') as f:
             for line in f.readlines():
                 line = line.strip()
+                if 'corsair_directory:' in line:
+                    self.mod_path = line.split(':')[1]
+                    self.mod_path = self.add_slash(self.mod_path)
                 if 'project_directory:' in line:
                     self.project_path = line.split(':')[1]
                     self.project_path = self.add_slash(self.project_path)
@@ -85,6 +90,9 @@ class Ctlog():
         """Looks in the genome folder, gets the exact file paths to the different genomes"""
         self.genome_paths = {}
         for genome in self.species:
+            gen = False
             for name in glob.glob(self.genome_path + genome + '_*.fasta'):
                 gen = name
+            if not gen:
+                sys.exit('ERROR: Genome files were not named correctly. They must contain the species code followed by an underscore, and end in .fasta')
             self.genome_paths[genome] = gen

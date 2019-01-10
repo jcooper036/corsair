@@ -7,14 +7,17 @@ def sample_ctl(file):
     with open (file, 'w+') as f:
         f.write(
             "### CTL Example file ###\n\n" +
+            "## For all file paths, it is best to specify the absolute path. This is because things may be scattered in many directories\n\n"
+            "## module directory. this is where the corsair directory is, absolute path\n"
+            "corsair_directory:/Users/$USR_NAME/corsair/\n\n"
             "## this is where all the files get stored. This does NOT have to be where the reference files are located, but any created files will go here\n" +
-            "project_directory:corsair/primates/\n\n" +
+            "project_directory:/Users/$USR_NAME/corsair/primates/\n\n" +
             "## reference CDS file, must be a cleaned fasta file. See README for more info.\n" +
-            "reference_CDS:corsair/primates/reference_CDS.fasta\n\n" +            
+            "reference_CDS:/Users/$USR_NAME/corsair/primates/reference_CDS.fasta\n\n" +            
             "## this where all the genomes are located\n" +
-            "genome_directory:corsair/primates/genomes/\n\n" +
+            "genome_directory:/Users/$USR_NAME/corsair/primates/genomes/\n\n" +
             "## list of all the genes to run. They need to be a 1:1 exact match to the names in the ref CDS file.\n" +
-            "gene_list:corsair/primates/gene_list.txt\n\n" +            
+            "gene_list:/Users/$USR_NAME/corsair/primates/gene_list.txt\n\n" +            
             "## clade tree (newick format). Names don't have to be 4 letters, but they MUST match the prefixes on genome files\n" +
             "tree:(((((Ptro,Ppan),Hsap),Ggor),((Mfas,Mmul),(Caty,Mleu))),Sbol);\n\n" +  
             "## reference species - in the tree listed above, this is the reference\n" +

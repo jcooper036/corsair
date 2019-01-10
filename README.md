@@ -23,12 +23,6 @@ There are also some python packages that are requied, but are easy to find with 
 - numpy
 - pickle
 
-
-To install this package, run pip:
-```bash
-pip install foobar
-```
-
 ## Pre-run requirements -- IMPORTANT!
 - Control file
     - fill out a control file. To generate a sample control file:

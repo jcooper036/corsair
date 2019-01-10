@@ -17,7 +17,7 @@ def run_paml_M7M8(ctl, iso_name, aligner):
     cor.m7_m8_control_file(ctl, iso, aligner)
 
     ## run codeml
-    command = 'corsair/Corsair/bin/paml/4.9e/bin/codeml ' + iso.paml_control_file(ctl)
+    command = ctl.mod_path + 'Corsair/bin/paml/4.9e/bin/codeml ' + iso.paml_control_file(ctl)
     cor.shell(command)
 
     ## remove all the files codeml leaves behind
@@ -46,7 +46,7 @@ def run_paml_M8M8a(ctl, iso_name, aligner):
     cor.m8_m8a_control_file(ctl, iso, aligner)
 
     ## run codeml
-    command = 'corsair/Corsair/bin/paml/4.9e/bin/codeml ' + iso.paml_control_file(ctl)
+    command = ctl.mod_path + 'Corsair/bin/paml/4.9e/bin/codeml ' + iso.paml_control_file(ctl)
     cor.shell(command)
 
     ## remove all the files codeml leaves behind

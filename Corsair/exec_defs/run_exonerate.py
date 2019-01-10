@@ -37,7 +37,7 @@ def run_exonerate(ctl, iso_name):
             #exonerates through scaffold using input protein
             input_scaffold_file = temp_dir + species + '_' + iso.name + '.fasta'
             results_file = iso.iso_files(ctl) + species
-            command = 'exonerate --model protein2genome --query ' + iso.protein_file(ctl) + ' --target ' + input_scaffold_file + ' --ryo "forcebeams \n>' + species + '\n%tcs\n" --bestn 1 > ' + results_file + '.txt'
+            command = ctl.mod_path + 'Corsair/bin/exonerate/2.2.0/bin/exonerate --model protein2genome --query ' + iso.protein_file(ctl) + ' --target ' + input_scaffold_file + ' --ryo "forcebeams \n>' + species + '\n%tcs\n" --bestn 1 > ' + results_file + '.txt'
             cor.shell(command)
 
             #removes temporary scaffold (mitigating measure for parallel)

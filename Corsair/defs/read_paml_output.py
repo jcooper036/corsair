@@ -29,6 +29,7 @@ def read_paml_file(file):
         'logLvals' : {},
         '2delta' : False,
         'pval' : False, # absolutely needed, other code depends on it
+        'beb_sites_raw' : False
     }
     with open(file, 'r') as f:
         logflag = False
@@ -45,6 +46,8 @@ def read_paml_file(file):
                 line = line.replace(' ','').split(':')[3].split('+')[0]
                 results['logLvals'][model] = line
     
+        
+
     ## compute pvalues of from log likelihood scores, 2 degrees of freedom
     results['2delta'] = 2 * abs(float(results['logLvals']['M7']) - float(results['logLvals']['M8']))
     results['pval'] = chi2.sf(results['2delta'], 2)

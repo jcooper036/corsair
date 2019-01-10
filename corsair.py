@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import Corsair as cor
 
-restart = False
+restart = True
 sample_ctl = '/Users/Jacob/corsair/primates/primates.ctl'
 
 ## parse the ctl file
@@ -22,9 +22,6 @@ for i in range(len(ctl.aligners) + 1):
         
         ## for each gene in that list
         for iso in ctl.gene_list[aligner]:
-
-            ## run all the execs on a gene by gene basis - allows for parallelizing this part
-            # cor.align_and_m7m8(ctl, iso, aligner)
 
             # # just do blast and exonerate
             if restart:
