@@ -58,13 +58,13 @@ class Ctlog():
                         print("The minimum alignment threshold cannot be less than 0.7. It has been set to 0.7.")
                         self.align_thresh = 0.7
                 if "gene_list:" in line:
-                    self.gene_list = {'all' : []}
+                    self.gene_list = []
                     self.gene_file = line.split(':')[1]
                     with open(self.gene_file, 'r') as f:
                         for line in f.readlines():
-                            self.gene_list['all'].append(line.strip())
-                if "aligners:" in line:
-                    self.aligners = line.split(':')[1].split(',')
+                            self.gene_list.append(line.strip())
+                # if "aligners:" in line:
+                #     self.aligners = line.split(':')[1].split(',')
 
         self.species_list(self.tree)
         self.find_genome_paths()

@@ -4,15 +4,12 @@ import Corsair as cor
 restart = True
 sample_ctl = '/Users/Jacob/corsair/primates/primates.ctl'
 
-## parse the ctl file
+## parse the ctl file, initialize the control object
 ctl = cor.load_ctl(sample_ctl)
 
 ## for the first time only - will over-write saves otherwise
 if restart:
     cor.corsair_initialize(ctl)
-
-## build the lists of different genes to run for each category
-ctl = cor.build_gene_lists(ctl)
 
 ## while there is anything left to do
 for i in range(len(ctl.aligners) + 1):
