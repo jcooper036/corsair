@@ -2,7 +2,7 @@
 
 import Corsair as cor
 
-def blast_and_exonerate(ctl, iso, aligner):
+def blast_and_exonerate(ctl, iso):
     """
     Input: control object, isoform name
     Output: results in the isoform folder in the project directory

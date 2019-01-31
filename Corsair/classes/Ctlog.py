@@ -63,9 +63,7 @@ class Ctlog():
                     with open(self.gene_file, 'r') as f:
                         for line in f.readlines():
                             self.gene_list.append(line.strip())
-                # if "aligners:" in line:
-                #     self.aligners = line.split(':')[1].split(',')
-
+                            
         self.species_list(self.tree)
         self.find_genome_paths()
 

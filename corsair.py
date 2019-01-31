@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import Corsair as cor
 
-restart = True
+restart = False
 sample_ctl = '/Users/Jacob/corsair/primates/primates.ctl'
 
 ## parse the ctl file, initialize the control object
@@ -11,28 +11,19 @@ ctl = cor.load_ctl(sample_ctl)
 if restart:
     cor.corsair_initialize(ctl)
 
-## while there is anything left to do
-for i in range(len(ctl.aligners) + 1):
-    
-    ## for each aligner
-    for aligner in ctl.aligners:
-        
-        ## for each gene in that list
-        for iso in ctl.gene_list[aligner]:
+## for each gene in that list
+for iso in ctl.gene_list:
 
-            # # just do blast and exonerate
-            if restart:
-                cor.blast_and_exonerate(ctl, iso, aligner)
+    # # just do blast and exonerate
+    if restart:
+        cor.blast_and_exonerate(ctl, iso)
 
-            # # just do the alignment and PAML (if Blast and Exonerate are already done)
-            if restart:
-                cor.align_and_paml(ctl, iso, aligner)
+    # # just do the alignment and PAML (if Blast and Exonerate are already done)
+    if restart:
+        cor.align_and_paml(ctl, iso)
 
-            # ## run all the results gathering functions for the whole gene list
-            cor.read_paml_output(ctl, iso, aligner)
-    
-    ## remake the aligners 'to do' lists
-    ctl = cor.build_gene_lists(ctl)
+    # ## run all the results gathering functions for the whole gene list
+    cor.read_paml_output(ctl, iso)
 
 ## standard data output for all genes
 for iso in ctl.gene_list['all']:

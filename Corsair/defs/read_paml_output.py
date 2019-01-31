@@ -3,7 +3,7 @@
 import Corsair as cor
 from scipy.stats import chi2
 
-def read_paml_output(ctl, iso_name, aligner):
+def read_paml_output(ctl, iso_name):
     """
     Input: control object, iso name, aligner name
     Output: PAML results file for that aligner, updated isoform object
@@ -38,6 +38,7 @@ def read_paml_file(file):
             
             ## log likelihood values
             if 'Model' in line:
+                print(line)
                 logflag = True
                 line = line.split('Model')[1].split(':')[0]
                 if line:
@@ -51,8 +52,6 @@ def read_paml_file(file):
     ## compute pvalues of from log likelihood scores, 2 degrees of freedom
     results['2delta'] = 2 * abs(float(results['logLvals']['M7']) - float(results['logLvals']['M8']))
     results['pval'] = chi2.sf(results['2delta'], 2)
-
-    print(results)
 
     return results
 

@@ -25,13 +25,13 @@ from Corsair.defs.shell import shell
 from Corsair.defs.control_file import m7_m8_control_file, m8_m8a_control_file
 from Corsair.defs.highest_pvalue import highest_pvalue
 from Corsair.defs.read_paml_output import read_paml_output
-from Corsair.defs.build_gene_lists import build_gene_lists
 
 ## exec definitions
 from Corsair.exec_defs.run_blast import run_blast
 from Corsair.exec_defs.run_exonerate import run_exonerate
 from Corsair.exec_defs.load_species_sequences import load_species_sequences
 from Corsair.exec_defs.run_alignment import run_alignment
+from Corsair.exec_defs.trim_sequences import trim_sequences
 from Corsair.exec_defs.back_translate import back_translate
 from Corsair.exec_defs.build_tree import build_tree
 from Corsair.exec_defs.run_paml import run_paml_M7M8, run_paml_M8M8a

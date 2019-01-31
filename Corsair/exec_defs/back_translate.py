@@ -3,7 +3,7 @@
 import Corsair as cor
 from copy import deepcopy
 
-def back_translate(ctl, iso_name, aligner):
+def back_translate(ctl, iso_name):
     """
     Input: control object, isoform name, aligner name
     Output: modifies the iso object to contain a dictionary of the back translated CDS sequence for PAML AND a .paml file for the alignment
@@ -11,7 +11,7 @@ def back_translate(ctl, iso_name, aligner):
     ## load the isoform object
     iso = cor.load_isoform(ctl, iso_name)
     
-    aa_alignment = iso.alignment[aligner]
+    aa_alignment = iso.trimmed
 
     ## generate a list of all the indexed positions that do not have a *, -, or X in any sequence
     good_indexes = []
@@ -42,14 +42,14 @@ def back_translate(ctl, iso_name, aligner):
             nuc_input[species] = nuc_input[species][:(k*3)]
 
     ## give it to the isoform
-    iso.backtrans[aligner] = nuc_input
+    iso.backtrans = nuc_input
 
     ## write the .paml file
     order = [ctl.ref_species]
     for species in iso.good_species:
         if species != ctl.ref_species:
             order.append(species)
-    with open(iso.paml_file(ctl, aligner), 'w') as f:
+    with open(iso.paml_file(ctl), 'w') as f:
         f.write('\t' + str(len(nuc_input.keys())) + '\t' + str(len(nuc_input[ctl.ref_species])) + '\n') ## changed to 'clade' variable
         for key in order:
             f.write(str(key) + '\n')

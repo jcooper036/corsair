@@ -16,6 +16,8 @@ class Isoform(object):
         """constructor function"""
         self.name = name
         self.alignment = {} # protein alignment with all good speices
+        self.condensed_alignment = {} # protein alignment for each aligner with -, X, * removed
+        self.trimmed = {} # protein alignment (species:seq) trimmed to min agreement between all aligners
         self.backtrans = {} # back translanted CDS sequecnes for each species with indels removed
         self.BEB_sites = {} # aligner : list of BEB sites
         self.BEB_sites['same_sites'] = [] # List of sites that are common between all aligners
@@ -29,10 +31,8 @@ class Isoform(object):
             'M8' : False
         } # will hold the results for each run of PAML. keys are
         self.paml_output_files = {
-            'clustal' : False,
-            'tcoffee' : False,
-            'muscle' : False,
-            'M8' : False            
+            'M7M8' : False,
+            'M8M8a' : False            
         } # will hold the results paths for each run of PAML. keys are
 
 
@@ -77,10 +77,10 @@ class Isoform(object):
         except:
             print('Need to specify an aligner')
 
-    def paml_file(self, ctl, algnr):
+    def paml_file(self, ctl):
         ## returns the paml alignment file path
         try:
-            return self.iso_files(ctl) + self.name + '_' + algnr + '.paml'
+            return self.iso_files(ctl) + self.name + '.paml'
         except:
             print('Need to specify and aligner')
 
