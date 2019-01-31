@@ -28,7 +28,7 @@ def read_paml_file(file):
     results = {
         'logLvals' : {},
         '2delta' : False,
-        'pval' : False, # absolutely needed, other code depends on it
+        'pval' : False,
         'beb_sites_raw' : False
     }
     with open(file, 'r') as f:
@@ -37,17 +37,30 @@ def read_paml_file(file):
             line = line.strip()
             
             ## log likelihood values
-            if 'Model' in line:
-                print(line)
+            if ('Model' in line):
                 logflag = True
                 line = line.split('Model')[1].split(':')[0]
                 if line:
                     model = 'M' + str(line.split(' ')[1])
+            
             if logflag and "lnL" in line:
                 line = line.replace(' ','').split(':')[3].split('+')[0]
                 results['logLvals'][model] = line
-    
-        
+                logflag = False
+            
+
+            ## BEB sites
+
+
+
+            ## dNdS values
+
+
+
+            ## Tree lengths
+
+
+
 
     ## compute pvalues of from log likelihood scores, 2 degrees of freedom
     results['2delta'] = 2 * abs(float(results['logLvals']['M7']) - float(results['logLvals']['M8']))

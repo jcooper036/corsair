@@ -25,12 +25,9 @@ for iso in ctl.gene_list:
     # ## run all the results gathering functions for the whole gene list
     cor.read_paml_output(ctl, iso)
 
-## standard data output for all genes
-for iso in ctl.gene_list['all']:
+    ## read get results
     cor.corsair_results(ctl, iso)
 
-    ## load the isoform object
-    iso = cor.load_isoform(ctl, iso)
-    print(iso.paml_results)
-
-
+    ## print them to the terminal
+    iso_ob = cor.load_isoform(ctl, iso)
+    print(iso_ob.paml_results)

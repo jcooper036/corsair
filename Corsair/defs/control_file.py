@@ -5,7 +5,7 @@ def m7_m8_control_file(ctl, iso):
     Input: control object, iso object
     Output: Writes a PAML control file to that file
     """
-    output_file = iso.iso_files(ctl) + iso.name + '_PAML_output.txt'
+    output_file = iso.iso_files(ctl) + iso.name + '_PAML_M7M8_output.txt'
     iso.paml_output_files['M7M8'] = output_file
     
     ## Write/rewrite control file
