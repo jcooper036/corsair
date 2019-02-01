@@ -18,6 +18,7 @@ def read_paml_output(ctl, iso_name):
             if os.path.isfile(iso.paml_output_files[aligner]):
                 iso = cor.read_paml_file(iso.paml_output_files[aligner], iso)
 
+    ## calculate p-values - This has to go here because it needs to to go before M8a
     iso = cor.paml_pvalues(iso)
 
     ## save the isoform object

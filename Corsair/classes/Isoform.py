@@ -40,7 +40,8 @@ class Isoform(object):
             'list_dnds' : [],
             'tuple_dnds' : [],
             'list_ds' : [],
-            'list_dn' : []
+            'list_dn' : [],
+            'recorded' : False
         } ## dN/dS stats
 
         self.paml_output_files = {

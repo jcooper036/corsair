@@ -34,7 +34,7 @@ def read_paml_file(file, iso):
             if 'Model 7: beta (10 categories)' in line:
                 dnds_cap = False
             
-            if dnds_cap and not iso.dnds['tuple_dnds']:
+            if dnds_cap and not iso.dnds['recorded']:
                 if len(line) > 0:
                     for ele in line.split():
                         if '(' in ele:
@@ -70,5 +70,7 @@ def read_paml_file(file, iso):
                 record_beb = True
             if 'grid ' in line:
                 record_beb = False
+
+    iso.dnds['recorded'] = True
 
     return iso

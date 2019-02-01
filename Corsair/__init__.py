@@ -8,9 +8,9 @@ from Corsair.classes.Ctlog import Ctlog
 ## wrapper definintions
 from Corsair.wrappers.corsair_initialize import corsair_initialize
 from Corsair.wrappers.corsair_execs import align_and_m7m8, run_m8m8a
-from Corsair.wrappers.corsair_results import corsair_results
 from Corsair.wrappers.blast_and_exonerate import blast_and_exonerate
 from Corsair.wrappers.align_and_paml import align_and_paml
+from Corsair.wrappers.results_processing import results_processing
 
 ## definintions
 from Corsair.defs.translate import translate
@@ -28,6 +28,8 @@ from Corsair.defs.read_paml_output import read_paml_output
 from Corsair.defs.read_paml_file import read_paml_file
 from Corsair.defs.paml_pvalues import paml_pvalues
 from Corsair.defs.log_ratio_test import log_ratio_test
+from Corsair.defs.beb_site_processing import beb_site_processing
+from Corsair.defs.dnds_processing import dnds_processing
 
 ## exec definitions
 from Corsair.exec_defs.run_blast import run_blast

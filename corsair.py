@@ -33,13 +33,12 @@ for iso in ctl.gene_list:
     if restart:
         cor.align_and_paml(ctl, iso)
 
-
     # ## run all the results gathering functions for the whole gene list
     cor.read_paml_output(ctl, iso)
 
     ## read get results
-    cor.corsair_results(ctl, iso)
+    cor.results_processing(ctl, iso)
 
     ## print them to the terminal
     iso_ob = cor.load_isoform(ctl, iso)
-    print(iso_ob.paml_results)
+    # print(iso_ob.paml_results)
