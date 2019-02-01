@@ -95,5 +95,5 @@ class Ctlog():
             for name in glob.glob(self.genome_path + genome + '_*.fasta'):
                 gen = name
             if not gen:
-                sys.exit('ERROR: Genome files were not named correctly. They must contain the species code followed by an underscore, and end in .fasta')
+                sys.exit('ERROR: Genome files could not be found. They must contain the species code followed by an underscore, and end in .fasta')
             self.genome_paths[genome] = gen

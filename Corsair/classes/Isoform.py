@@ -25,11 +25,24 @@ class Isoform(object):
         self.scaffolds = {} # species:scaffold, filled after blast
         self.good_species = [] # eventually filled with the species that have good sequences
         self.paml_results = {
-            'clustal' : False,
-            'tcoffee' : False,
-            'muscle' : False,
+            'logLvals' : {'M7' : False, 'M8' : False, 'M8a' : False},
+            '2delta' : {'M7M8' : False, 'M8M8a' : False},
+            'pval' : {'M7M8' : False, 'M8M8a' : False},
+            'beb_sites_raw' : {}
+        } # will hold the results from PAML
+        self.tree_length = {
+            'M7' : False,
             'M8' : False
-        } # will hold the results for each run of PAML. keys are
+        } ## tree lengths from PAML
+        self.dnds = {
+            'av_dnds' : False,
+            'max_ds' : False,
+            'list_dnds' : [],
+            'tuple_dnds' : [],
+            'list_ds' : [],
+            'list_dn' : []
+        } ## dN/dS stats
+
         self.paml_output_files = {
             'M7M8' : False,
             'M8M8a' : False            

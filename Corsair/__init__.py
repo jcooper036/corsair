@@ -25,6 +25,9 @@ from Corsair.defs.shell import shell
 from Corsair.defs.control_file import m7_m8_control_file, m8_m8a_control_file
 from Corsair.defs.highest_pvalue import highest_pvalue
 from Corsair.defs.read_paml_output import read_paml_output
+from Corsair.defs.read_paml_file import read_paml_file
+from Corsair.defs.paml_pvalues import paml_pvalues
+from Corsair.defs.log_ratio_test import log_ratio_test
 
 ## exec definitions
 from Corsair.exec_defs.run_blast import run_blast

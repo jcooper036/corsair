@@ -40,8 +40,10 @@ def run_paml_M8M8a(ctl, iso_name):
     ## load the isoform object
     iso = cor.load_isoform(ctl, iso_name)
 
+    print(iso.paml_results)
+
     ## check the previous p-value:
-    if iso.paml_results['M7M8']['pval'] > 0.05:
+    if not iso.paml_results['pval']['M7M8']< 0.05:
         return None
 
     print('Running PAML(M8 vs M8a) for {}'.format(iso.name))

@@ -51,7 +51,7 @@ def m8_m8a_control_file(ctl, iso):
     with open(iso.paml_control_file(ctl), 'w') as f:
         f.write('seqfile = ' + iso.iso_files(ctl) + iso.name +'.paml \n')
         f.write('treefile = ' + iso.iso_files(ctl) + iso.name + '_tree.txt \n')
-        f.write('outfile = ' + iso.iso_files(ctl) + iso.name + '_PAML_output.txt \n')
+        f.write('outfile = ' + output_file + ' \n')
         f.write('noisy = 3 \n')
         f.write('verbose = 1 \n')
         f.write('runmode = 0 \n')
