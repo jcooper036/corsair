@@ -18,6 +18,3 @@ def results_processing(ctl, iso_name):
 
     ## dNdS averages and maxes
     cor.dnds_processing(ctl, iso_name)
-
-    ## save the isoform object
-    cor.save_isoform(ctl, iso)

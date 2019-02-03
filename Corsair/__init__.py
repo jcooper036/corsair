@@ -30,6 +30,7 @@ from Corsair.defs.paml_pvalues import paml_pvalues
 from Corsair.defs.log_ratio_test import log_ratio_test
 from Corsair.defs.beb_site_processing import beb_site_processing
 from Corsair.defs.dnds_processing import dnds_processing
+from Corsair.defs.write_output import write_output
 
 ## exec definitions
 from Corsair.exec_defs.run_blast import run_blast

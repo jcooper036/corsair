@@ -65,6 +65,11 @@ class Ctlog():
                             line = line.strip()
                             if line:
                                 self.gene_list.append(line)
+                if "BEB_threshold:" in line:
+                    try:
+                        self.beb_threshold = float(line.split(':')[1])
+                    except:
+                        self.beb_threshold = 0.95
 
                             
         self.species_list(self.tree)

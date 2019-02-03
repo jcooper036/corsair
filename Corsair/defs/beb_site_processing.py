@@ -8,10 +8,13 @@ def beb_site_processing(ctl, iso_name):
     Input: control object, iso name
     Output: BEB site alignment, saved isoform object
     """    
-    
     ## load the isoform object
     iso = cor.load_isoform(ctl, iso_name)
     
+    #@ remove later
+    iso.paml_results['beb_total_sites'] = {}
+    iso.paml_results['beb_hit_sites'] = {}
+
     ## make a positiion variable that we can incriment
     for site in iso.paml_results['beb_sites_raw']:
         iso.paml_results['beb_sites_raw'][site]['pos'] = site
@@ -27,12 +30,17 @@ def beb_site_processing(ctl, iso_name):
                 iso.paml_results['beb_sites_raw'][site]['pos'] += 1
     
     ## make a new data set
-    iso.paml_results['beb_sites'] = {}
     for site in iso.paml_results['beb_sites_raw']:
         site_key = iso.paml_results['beb_sites_raw'][site]['pos']
         site_id = iso.paml_results['beb_sites_raw'][site]['ID']
         site_beb = iso.paml_results['beb_sites_raw'][site]['BEB']
-        iso.paml_results['beb_sites'][site_key] = {"ID" : site_id, "BEB" : site_beb}
+        iso.paml_results['beb_total_sites'][site_key] = {"ID" : site_id, "BEB" : site_beb}
+
+    ## generate the list of hits
+    for site in iso.paml_results['beb_total_sites']:
+        ## to deal with float precision
+        if iso.paml_results['beb_total_sites'][site]['BEB'] > (ctl.beb_threshold - 0.00001):
+            iso.paml_results['beb_hit_sites'][site] = iso.paml_results['beb_total_sites'][site]
 
     ## save the isoform object
     cor.save_isoform(ctl, iso)

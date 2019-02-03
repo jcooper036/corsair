@@ -8,8 +8,8 @@ if sys.argv[0]:
     if "gene_list=['" in sys.argv[0]:
         gene_list = sys.argv[0].split("[")[1].split("]")[0].replace("'", "").split(",")
 
-restart = False
-sample_ctl = '/Users/Jacob/corsair/primates/primates.ctl'
+restart = True
+sample_ctl = '/Users/Jacob/corsair/primates/primates_full.ctl'
 
 ## parse the ctl file, initialize the control object
 ctl = cor.load_ctl(sample_ctl)
@@ -41,4 +41,5 @@ for iso in ctl.gene_list:
 
     ## print them to the terminal
     iso_ob = cor.load_isoform(ctl, iso)
-    # print(iso_ob.paml_results)
+
+cor.write_output(ctl)

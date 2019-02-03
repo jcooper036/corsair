@@ -24,6 +24,7 @@ def run_paml_M7M8(ctl, iso_name):
     try:
         for f in ['2NG.dN','2NG.dS','2NG.t','4fold.nuc','lnf','rst','rst1','rub']:
             os.remove(iso.iso_files(ctl) + f)
+            os.remove(os.getcwd() + f)
     except:
         pass
     
@@ -43,7 +44,7 @@ def run_paml_M8M8a(ctl, iso_name):
     print(iso.paml_results)
 
     ## check the previous p-value:
-    if not iso.paml_results['pval']['M7M8']< 0.05:
+    if not iso.paml_results['pval']['M7M8'] < 0.05:
         return None
 
     print('Running PAML(M8 vs M8a) for {}'.format(iso.name))

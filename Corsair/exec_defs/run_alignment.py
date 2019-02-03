@@ -36,6 +36,7 @@ def run_alignment(ctl, iso_name):
         ## cleans up a file that is sometimes made, but useless
         try:
             os.remove(iso + '_coff.dnd')
+            os.remove(os.getcwd() + iso + '_coff.dnd')
         except:
             pass
 
