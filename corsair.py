@@ -2,25 +2,21 @@
 import Corsair as cor
 import sys
 
-## can take the gene list from the call
-gene_list = False
-if sys.argv[0]:
-    if "gene_list=['" in sys.argv[0]:
-        gene_list = sys.argv[0].split("[")[1].split("]")[0].replace("'", "").split(",")
 
-restart = True
-sample_ctl = '/Users/Jacob/corsair/primates/primates_full.ctl'
+restart = False
+
+# sample_ctl = '/Users/Jacob/corsair/primates/primates_full.ctl'
+sample_ctl = '/Users/Jacob/corsair/murinae/mouse.ctl'
 
 ## parse the ctl file, initialize the control object
 ctl = cor.load_ctl(sample_ctl)
 
+## loads the gene list from the control object
+ctl.load_gene_list()
+
 ## for the first time only - will over-write saves otherwise
 if restart:
     cor.corsair_initialize(ctl)
-
-## set the gene list to the thing we read in, if it is there
-if gene_list:
-    ctl.gene_list = gene_list
 
 ## for each gene in that list
 for iso in ctl.gene_list:
@@ -38,8 +34,5 @@ for iso in ctl.gene_list:
 
     ## read get results
     cor.results_processing(ctl, iso)
-
-    ## print them to the terminal
-    iso_ob = cor.load_isoform(ctl, iso)
 
 cor.write_output(ctl)

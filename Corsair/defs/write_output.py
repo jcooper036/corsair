@@ -30,16 +30,15 @@ def write_output(ctl):
 
     ## loop over each isoform
     for iso_name in ctl.gene_list:
-        
 
         ## load the isoform object
         iso = cor.load_isoform(ctl, iso_name)
-        
-        iso.ensembl = False
-        iso.paml_results['beb_hit_sites'] = {}
 
         ## function below
         results.append(result_line(iso, ctl))
+
+        ## write each gene to it's output file
+        cor.write_gene_results(iso, ctl)
         
         ## save the isoform object
         cor.save_isoform(ctl, iso)
@@ -141,7 +140,7 @@ def result_line(iso, ctl):
     ## BEB hits
     if iso.paml_results['beb_hit_sites']:
         hits = str(len(iso.paml_results['beb_hit_sites'])) + '\t'
-        sites = str(iso.paml_results['beb_hit_sites']) + '\t'
+        sites = manage_bebs(iso.paml_results['beb_hit_sites']) + '\t'
     else:
         hits = '\t'
         sites = '\t'
@@ -167,3 +166,14 @@ def result_line(iso, ctl):
     ]
 
     return string[0]
+
+def manage_bebs(beb_dict):
+    """
+    Input: The BEB site dictionary. Return: string of BEB sites
+    """
+    ret_string = []
+    for entry in beb_dict:
+        piece = str(beb_dict[entry]['ID']) + str(entry)
+        ret_string.append(piece)
+    ret_string = ", ".join(ret_string)
+    return ret_string

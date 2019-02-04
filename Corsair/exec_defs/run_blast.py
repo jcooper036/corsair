@@ -12,6 +12,15 @@ def run_blast(ctl, iso_name):
     ## load the iso object
     iso = cor.load_isoform(ctl, iso_name)
 
+    ## check for what BLAST needs
+    missing = []
+    for species in ctl.genome_paths:
+        if not ctl.genome_paths[species]:
+            missing.append(species)
+    if missing:
+        print("ERROR: Could not find genomes for {}, aborting BLAST".format(missing))
+        return None
+
     print('Running tBLASTn for ' + iso.name)
 
     ## check that the isoform has the appropriate data

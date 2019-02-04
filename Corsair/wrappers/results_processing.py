@@ -7,9 +7,6 @@ def results_processing(ctl, iso_name):
     Input: control object, iso name
     Output: none, executes the different results processing which save the files
     """    
-    
-    ## load the isoform object
-    iso = cor.load_isoform(ctl, iso_name)
 
     ## p-values should already be calculated
 

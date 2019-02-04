@@ -11,6 +11,10 @@ def beb_site_processing(ctl, iso_name):
     ## load the isoform object
     iso = cor.load_isoform(ctl, iso_name)
     
+    ## don't do anything if there are no results
+    if not iso.paml_results['logLvals']:
+        return None
+
     #@ remove later
     iso.paml_results['beb_total_sites'] = {}
     iso.paml_results['beb_hit_sites'] = {}
@@ -41,6 +45,13 @@ def beb_site_processing(ctl, iso_name):
         ## to deal with float precision
         if iso.paml_results['beb_total_sites'][site]['BEB'] > (ctl.beb_threshold - 0.00001):
             iso.paml_results['beb_hit_sites'][site] = iso.paml_results['beb_total_sites'][site]
+
+    ## clear the list of M8a was not a hit
+    if iso.paml_results['pval']['M8M8a']:
+        if not iso.paml_results['pval']['M8M8a'] < 0.05:
+            iso.paml_results['beb_hit_sites'] = {}
+    else:
+        iso.paml_results['beb_hit_sites'] = {}
 
     ## save the isoform object
     cor.save_isoform(ctl, iso)

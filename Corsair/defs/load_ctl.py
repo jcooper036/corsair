@@ -34,7 +34,6 @@ def load_ctl(file):
             return "Aborting"
     else:
         print("ERROR: Genome directory not found.")
-        return "Aborting"
     
     ## Check that the reference CDS file exists. Raise and error if not
     print('Checking for the reference CDS fasta file')

@@ -11,6 +11,14 @@ def run_paml_M7M8(ctl, iso_name):
     ## load the isoform object
     iso = cor.load_isoform(ctl, iso_name)
 
+    paml_input = iso.iso_files(ctl) + iso.name +'.paml'
+    tree_file = iso.iso_files(ctl) + iso.name + '_tree.txt'
+
+    ## check to make sure that the files that are needed are there
+    if (not os.path.isfile(paml_input)) or (not os.path.isfile(tree_file)):
+        print('No PAML input and/or tree file for {}, aborting PAML'.format(iso.name))
+        return None
+
     print('Running PAML(M7 vs M8) for {}'.format(iso.name))
 
     ## write the control file
@@ -23,8 +31,7 @@ def run_paml_M7M8(ctl, iso_name):
     ## remove all the files codeml leaves behind
     try:
         for f in ['2NG.dN','2NG.dS','2NG.t','4fold.nuc','lnf','rst','rst1','rub']:
-            os.remove(iso.iso_files(ctl) + f)
-            os.remove(os.getcwd() + f)
+            os.remove(os.getcwd() + '/' + f)
     except:
         pass
     
@@ -41,10 +48,11 @@ def run_paml_M8M8a(ctl, iso_name):
     ## load the isoform object
     iso = cor.load_isoform(ctl, iso_name)
 
-    print(iso.paml_results)
-
-    ## check the previous p-value:
-    if not iso.paml_results['pval']['M7M8'] < 0.05:
+    ## check the previous p-value, and that it was run:
+    if iso.paml_results['pval']['M7M8']:
+        if not iso.paml_results['pval']['M7M8'] < 0.05:
+            return None
+    else:
         return None
 
     print('Running PAML(M8 vs M8a) for {}'.format(iso.name))
@@ -59,7 +67,7 @@ def run_paml_M8M8a(ctl, iso_name):
     ## remove all the files codeml leaves behind
     try:
         for f in ['2NG.dN','2NG.dS','2NG.t','4fold.nuc','lnf','rst','rst1','rub']:
-            os.remove(iso.iso_files(ctl) + f)
+            os.remove(os.getcwd() + '/' + f)
     except:
         pass
     

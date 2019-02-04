@@ -11,6 +11,15 @@ def run_exonerate(ctl, iso_name):
     ## load the isoform object
     iso = cor.load_isoform(ctl, iso_name)
 
+    ## check for what exonerate needs
+    missing = []
+    for species in ctl.genome_paths:
+        if not ctl.genome_paths[species]:
+            missing.append(species)
+    if missing:
+        print("ERROR: Could not find genomes for {}, aborting exonerate".format(missing))
+        return None
+
     print('Running exonerate for ' + iso.name)
 
     ## check that the temp directory exists

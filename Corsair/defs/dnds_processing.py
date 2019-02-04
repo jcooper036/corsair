@@ -10,7 +10,11 @@ def dnds_processing(ctl, iso_name):
     
     ## load the isoform object
     iso = cor.load_isoform(ctl, iso_name)
-    
+
+    ## don't do anything if there are no results
+    if not iso.dnds['list_ds']:
+        return None 
+
     ## max ds
     iso.dnds['max_ds'] = max(iso.dnds['list_ds'])
 

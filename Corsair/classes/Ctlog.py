@@ -58,13 +58,13 @@ class Ctlog():
                         print("The minimum alignment threshold cannot be less than 0.7. It has been set to 0.7.")
                         self.align_thresh = 0.7
                 if "gene_list:" in line:
-                    self.gene_list = []
+                    self.secret_gene_list = []
                     self.gene_file = line.split(':')[1]
                     with open(self.gene_file, 'r') as f:
                         for line in f.readlines():
                             line = line.strip()
                             if line:
-                                self.gene_list.append(line)
+                                self.secret_gene_list.append(line)
                 if "BEB_threshold:" in line:
                     try:
                         self.beb_threshold = float(line.split(':')[1])
@@ -100,5 +100,9 @@ class Ctlog():
             for name in glob.glob(self.genome_path + genome + '_*.fasta'):
                 gen = name
             if not gen:
-                sys.exit('ERROR: Genome files could not be found. They must contain the species code followed by an underscore, and end in .fasta')
+                print('ERROR: Genome files could not be found. They must contain the species code followed by an underscore, and end in .fasta')
             self.genome_paths[genome] = gen
+    
+    def load_gene_list(self):
+        """Actaully uses the gene list. This is here in case the gene list is set by other means"""
+        self.gene_list = self.secret_gene_list
