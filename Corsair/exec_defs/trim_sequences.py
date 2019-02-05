@@ -94,7 +94,8 @@ def trim_sequences(ctl, iso_name):
     temp =  set()
     for site in iso.mask:
         temp.add(site)
-        temp.add(site - 1)
+        if (site - 1) >= 0:
+            temp.add(site - 1) # only add things that are possible
         temp.add(site + 1)
     iso.mask = temp
 

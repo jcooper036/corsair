@@ -33,7 +33,7 @@ def write_gene_results(iso, ctl):
 
     ## BEB sites
     if iso.paml_results['beb_hit_sites']:
-        f.write('BEB sites with posterior prob. > {}: {}\n'.format(ctl.beb_threshold, len(iso.paml_results)))
+        f.write('BEB sites with posterior prob. > {}: {}\n'.format(ctl.beb_threshold, len(iso.paml_results['beb_hit_sites'])))
         for site in iso.paml_results['beb_hit_sites']:
             f.write('{}{} '.format(iso.paml_results['beb_hit_sites'][site]['ID'], site))
         f.write('\n\n')
@@ -52,9 +52,6 @@ def write_gene_results(iso, ctl):
         for species in iso.alignment['clustal']:
             if species != ctl.ref_species:
                 f.write(species + '\t' + iso.alignment['clustal'][species] + '\n')
-
-    print(iso.alignment['clustal'])
-
     f.close()
 
 

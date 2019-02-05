@@ -15,10 +15,6 @@ def beb_site_processing(ctl, iso_name):
     if not iso.paml_results['logLvals']:
         return None
 
-    #@ remove later
-    iso.paml_results['beb_total_sites'] = {}
-    iso.paml_results['beb_hit_sites'] = {}
-
     ## make a positiion variable that we can incriment
     for site in iso.paml_results['beb_sites_raw']:
         iso.paml_results['beb_sites_raw'][site]['pos'] = site
@@ -32,7 +28,7 @@ def beb_site_processing(ctl, iso_name):
         for site in iso.paml_results['beb_sites_raw']:
             if iso.paml_results['beb_sites_raw'][site]['pos'] >= mask_site:
                 iso.paml_results['beb_sites_raw'][site]['pos'] += 1
-    
+
     ## make a new data set
     for site in iso.paml_results['beb_sites_raw']:
         site_key = iso.paml_results['beb_sites_raw'][site]['pos']
@@ -52,6 +48,7 @@ def beb_site_processing(ctl, iso_name):
             iso.paml_results['beb_hit_sites'] = {}
     else:
         iso.paml_results['beb_hit_sites'] = {}
+
 
     ## save the isoform object
     cor.save_isoform(ctl, iso)

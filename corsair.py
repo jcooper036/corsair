@@ -3,7 +3,7 @@ import Corsair as cor
 import sys
 
 
-restart = False
+restart = True
 
 # sample_ctl = '/Users/Jacob/corsair/primates/primates_full.ctl'
 sample_ctl = '/Users/Jacob/corsair/murinae/mouse.ctl'
