@@ -52,6 +52,20 @@ def write_gene_results(iso, ctl):
         for species in iso.alignment['clustal']:
             if species != ctl.ref_species:
                 f.write(species + '\t' + iso.alignment['clustal'][species] + '\n')
+    
+    ## if there were BEB sites, mark those on the alignment by writing the results under
+    if iso.paml_results['beb_hit_sites']:
+        f.write('\nBEB \t')
+        sites = list(iso.paml_results['beb_hit_sites'].keys())
+        count = 1
+        for i in range(len(iso.alignment['clustal'][ctl.ref_species])):
+            if count in sites:
+                f.write('+')
+            else:
+                f.write(' ')
+            count += 1
+    
+    
     f.close()
 
 
