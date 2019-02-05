@@ -22,11 +22,11 @@ if __name__ == '__main__':
     except docopt.DocoptExit as e:
         print(e)
 
-
-print(iso_name, ctl_file)
-
 ## parse the ctl file, initialize the control object
 ctl = cor.load_ctl(ctl_file)
+
+## a few things rely of the gene list being here, so just make it a one item list
+ctl.gene_list = [iso_name]
 
 ## for the first time only - will over-write saves otherwise
 cor.corsair_initialize(ctl)

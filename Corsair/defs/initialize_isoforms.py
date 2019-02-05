@@ -11,20 +11,12 @@ def initialize_isoforms(ctl):
     """
     isoforms = {}
 
-    ## load the list of isoforms
-    iso_list = []
-    with open(ctl.gene_file, 'r') as f:
-        for line in f.readlines():
-            line = line.strip()
-            if len(line) > 0:
-                iso_list.append(line)
-
     ## load the list of reference CDS sequences
     ref_CDS_seqs = cor.read_fasta(ctl.ref_cds)
 
     ## check that each isoform is in the reference CDS sequences
     not_there = []
-    for iso in iso_list:
+    for iso in ctl.gene_list:
         
         ## if it is there, init the Isoform class and give it the reference sequence
         if iso in ref_CDS_seqs:
