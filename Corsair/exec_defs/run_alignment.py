@@ -12,6 +12,15 @@ def run_alignment(ctl, iso_name):
     ## load the isoform object
     iso = cor.load_isoform(ctl, iso_name)
 
+    ## make sure that the gene has enough sequecnes
+    if iso.blast_prot:
+        if not len(list(iso.blast_prot.keys())) > 1:
+            print('ERROR: not enough sequences to align')
+            return None
+    else:
+        print('ERROR: Alignment did not run, blast sequences were not translated')
+        return None
+
     ## loop over the commands for the different aligners
     for aligner in ['clustal', 'tcoffee', 'muscle']:
 

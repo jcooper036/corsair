@@ -15,6 +15,7 @@ class Isoform(object):
         """constructor function"""
         self.name = name
         self.ensembl = False
+        self.blast_prot = {}
         self.alignment = {} # protein alignment with all good speices
         self.condensed_alignment = {} # protein alignment for each aligner with -, X, * removed
         self.trimmed = {} # protein alignment (species:seq) trimmed to min agreement between all aligners
@@ -125,7 +126,6 @@ class Isoform(object):
     def blast_trans(self):
         """Translates self.blast_dic into protein sequences, stored in self.blast_prot"""
         try:
-            self.blast_prot = {}
             for key in self.blast_dic:
                 self.blast_prot[key] = cor.translate(self.blast_dic[key])
         except:
