@@ -13,7 +13,7 @@ def back_translate(ctl, iso_name):
     
     ## check to make sure everything will work
     if not iso.trimmed:
-        print("Warning: There are no trimmed alignment sequences. Back translate aborting")
+        print("WARNING: Back translation did not happen. There were no trimmed sequences")
         return None
     
     aa_alignment = iso.trimmed

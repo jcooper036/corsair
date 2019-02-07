@@ -32,6 +32,7 @@ from Corsair.defs.beb_site_processing import beb_site_processing
 from Corsair.defs.dnds_processing import dnds_processing
 from Corsair.defs.write_output import write_output
 from Corsair.defs.write_gene_results import write_gene_results
+from Corsair.defs.scaffolds_from_file import scaffolds_from_file
 
 ## exec definitions
 from Corsair.exec_defs.run_blast import run_blast

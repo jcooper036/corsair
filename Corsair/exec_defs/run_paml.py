@@ -16,7 +16,7 @@ def run_paml_M7M8(ctl, iso_name):
 
     ## check to make sure that the files that are needed are there
     if (not os.path.isfile(paml_input)) or (not os.path.isfile(tree_file)):
-        print('No PAML input and/or tree file for {}, aborting PAML'.format(iso.name))
+        print('WARNING: No PAML input and/or tree file for {}, aborting PAML'.format(iso.name))
         return None
 
     print('Running PAML(M7 vs M8) for {}'.format(iso.name))

@@ -79,14 +79,6 @@ def write_gene_results(iso, ctl):
                         f.write(' ')
                     if site != '-':
                         idx += 1
-                # count = 1
-                # for i in range(len(iso.alignment['clustal'][ctl.ref_species])):
-                #     if count in sites:
-                #         f.write('+')
-                #     else:
-                #         f.write(' ')
-                #     count += 1
-    
     
     f.close()
 

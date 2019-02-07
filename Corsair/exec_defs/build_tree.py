@@ -35,7 +35,7 @@ def build_tree(ctl, iso_name):
             outfile.write(infile.read().replace(':0.00000',''))
         print('Tree for ' + iso.name +': built.')
     else:
-        print('Not enough species to analyze {}: Only found sequences for {}/{} species'.format(iso.name, str(len(iso.good_species)), str(ctl.min_species)))
+        print('WARNING: Not enough species to analyze {}: Only found sequences for {}/{} required species'.format(iso.name, str(len(iso.good_species)), str(ctl.min_species)))
         with open(iso.results_file(ctl),'a') as f:
             f.write('\n' + str(iso.name) + '\tNot enough species for PAML: Only found ' + str(len(iso.good_species)) + ' species')
     

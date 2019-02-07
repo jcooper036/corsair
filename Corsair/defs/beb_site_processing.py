@@ -24,9 +24,6 @@ def beb_site_processing(ctl, iso_name):
     ## sort the mask - it is a set before this
     iso.mask_sort = sorted(list(iso.mask))
 
-    print(iso.mask_sort)
-
-
     ## iterate over the mask to tell us what sites need re-indexing
     for m_site in iso.mask_sort:
         mask_site = m_site + 1

@@ -31,8 +31,8 @@ ctl.gene_list = [iso_name]
 ## for the first time only - will over-write saves otherwise
 cor.corsair_initialize(ctl)
 
-# # just do blast and exonerate
-cor.run_blast(ctl, iso_name)
+# just do exonerate
+cor.scaffolds_from_file(ctl, iso_name)
 cor.run_exonerate(ctl, iso_name)
 cor.load_species_sequences(ctl, iso_name)
 

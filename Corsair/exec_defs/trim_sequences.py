@@ -15,6 +15,7 @@ def trim_sequences(ctl, iso_name):
 
     ## make sure the alignment is there
     if not iso.alignment:
+        print('WARNING: Trimming did not take place - no sequence alignmnets')
         return None
 
     ## remove all the indels from each sequence
@@ -108,7 +109,8 @@ def trim_sequences(ctl, iso_name):
         count = 1
         for pos in iso.alignment[aligner][ctl.ref_species]:
             if pos == '-':
-                iso.mask.add(count-1)
+                if (count-1) >= 0:
+                    iso.mask.add(count-1)
                 iso.mask.add(count)
             else:
                 count += 1

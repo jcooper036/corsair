@@ -70,8 +70,14 @@ class Ctlog():
                         self.beb_threshold = float(line.split(':')[1])
                     except:
                         self.beb_threshold = 0.95
-
-                            
+                
+                if "blast_scaffolds:" in line:
+                    try:
+                        self.scaffold_path = str(line.split(':')[1])
+                        self.scaffold_path = self.add_slash(self.scaffold_path)
+                    except:
+                        pass
+                           
         self.species_list(self.tree)
         self.find_genome_paths()
 
