@@ -25,7 +25,11 @@ def sample_ctl(file):
             "## minimum species count - this is the fewest species that PAML will be attempted with. min:3, max:species_count, default:0.7*species_count\n" +
             "minimum_species:3\n\n" +
             "## alignment threshold - this is the alignment threshold for identifying genes. min:0.7, max:1, default:0.95\n" +
-            "alignment_threshold:0.95\n\n"
+            "alignment_threshold:0.95\n\n" +
             "## alingers - name of the aligners, in order, comma seperated, no spaces. Default is clustal, tcoffee, muscle, M8 . Lots more to be done to change these, generally leave the same\n" +
-            "aligners:clustal,tcoffee,muscle,M8\n\n"            
+            "aligners:clustal,tcoffee,muscle,M8\n\n" +
+            "## BEB threshold - what does the posterior probability of the BEB analysis need to be to be considered a hit? Default: 0.95\n" +
+            "BEB_threshold:0.95\n\n" +
+            "## blast scaffolds - if there are pre-computed blast scaffolds, where are they?\n" +
+            "blast_scaffolds:/Users/$USR_NAME/corsair/primates/scaffolds/\n\n"           
         )
