@@ -13,6 +13,10 @@ def trim_sequences(ctl, iso_name):
     ## load the isoform object
     iso = cor.load_isoform(ctl, iso_name)
 
+    ## make sure the alignment is there
+    if not iso.alignment:
+        return None
+
     ## remove all the indels from each sequence
     for aligner in ['clustal', 'tcoffee', 'muscle']:
         iso.condensed_alignment[aligner] = min_aa_seq(ctl, iso.alignment[aligner])
@@ -84,12 +88,12 @@ def trim_sequences(ctl, iso_name):
                 else:
                     iso.trimming[aligner][species] += '-'
     
-    ## make a set of the indexes that we want to keep
+    ## make a set of the indexes that we want to get rid of
     iso.mask = set()
     for idx in range(len(iso.trimming['ref'])):
         if any(iso.trimming[aligner][ctl.ref_species][idx] == '-' for aligner in ['clustal', 'tcoffee', 'muscle']):
             iso.mask.add(idx)
-    
+
     ## add +1 and -1 site for every site in the mask
     temp =  set()
     for site in iso.mask:
@@ -98,6 +102,16 @@ def trim_sequences(ctl, iso_name):
             temp.add(site - 1) # only add things that are possible
         temp.add(site + 1)
     iso.mask = temp
+
+    ## find the insertion positions as compared to the ref, add the flanking positions to the mask
+    for aligner in ['clustal', 'tcoffee', 'muscle']:
+        count = 1
+        for pos in iso.alignment[aligner][ctl.ref_species]:
+            if pos == '-':
+                iso.mask.add(count-1)
+                iso.mask.add(count)
+            else:
+                count += 1
 
     ## apply the mask to each species, doesn't matter which alinger we use
     for species in iso.condensed_alignment['clustal']:

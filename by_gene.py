@@ -32,9 +32,10 @@ ctl.gene_list = [iso_name]
 cor.corsair_initialize(ctl)
 
 # # just do blast and exonerate
-cor.blast_and_exonerate(ctl, iso_name)
+# cor.blast_and_exonerate(ctl, iso_name)
 
 # # just do the alignment and PAML (if Blast and Exonerate are already done)
+cor.load_species_sequences(ctl, iso_name)
 cor.align_and_paml(ctl, iso_name)
 
 # ## run all the results gathering functions for the whole gene list

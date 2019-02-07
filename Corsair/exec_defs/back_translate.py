@@ -11,6 +11,11 @@ def back_translate(ctl, iso_name):
     ## load the isoform object
     iso = cor.load_isoform(ctl, iso_name)
     
+    ## check to make sure everything will work
+    if not iso.trimmed:
+        print("Warning: There are no trimmed alignment sequences. Back translate aborting")
+        return None
+    
     aa_alignment = iso.trimmed
 
     ## generate a list of all the indexed positions that do not have a *, -, or X in any sequence

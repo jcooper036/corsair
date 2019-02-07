@@ -25,7 +25,8 @@ class Isoform(object):
         self.ref_min_aa = {} # the minimum amino acid sequence of the reference after all indels compared with other species are removed
         self.scaffolds = {} # species:scaffold, filled after blast
         self.good_species = [] # eventually filled with the species that have good sequences
-        
+        self.mask = False
+
         # will hold the results from PAML
         self.paml_results = {
             'logLvals' : {'M7' : False, 'M8' : False, 'M8a' : False},

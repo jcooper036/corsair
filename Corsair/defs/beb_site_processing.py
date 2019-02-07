@@ -14,6 +14,8 @@ def beb_site_processing(ctl, iso_name):
     ## don't do anything if there are no results
     if not iso.paml_results['logLvals']:
         return None
+    if not iso.mask:
+        return None
 
     ## make a positiion variable that we can incriment
     for site in iso.paml_results['beb_sites_raw']:
@@ -21,6 +23,9 @@ def beb_site_processing(ctl, iso_name):
 
     ## sort the mask - it is a set before this
     iso.mask_sort = sorted(list(iso.mask))
+
+    print(iso.mask_sort)
+
 
     ## iterate over the mask to tell us what sites need re-indexing
     for m_site in iso.mask_sort:
