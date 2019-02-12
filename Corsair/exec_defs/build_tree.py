@@ -13,6 +13,11 @@ def build_tree(ctl, iso_name):
     ## load the isoform object
     iso = cor.load_isoform(ctl, iso_name)
 
+    ## check to make sure that the CDS file exists 
+    if not os.path.isfile(iso.CDS_file(ctl)):
+        print("WARNING: There was no CDS file for {} so the tree could not be built".format(iso.name))
+        return None
+
     ## load in the sequences
     cds = SeqIO.to_dict(SeqIO.parse(iso.CDS_file(ctl),'fasta'))
 

@@ -91,6 +91,7 @@ def trim_sequences(ctl, iso_name):
     
     ## make a set of the indexes that we want to get rid of
     iso.mask = set()
+    
     for idx in range(len(iso.trimming['ref'])):
         if any(iso.trimming[aligner][ctl.ref_species][idx] == '-' for aligner in ['clustal', 'tcoffee', 'muscle']):
             iso.mask.add(idx)
