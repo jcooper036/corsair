@@ -15,6 +15,7 @@ def load_isoform(ctl, iso_name):
         with open(pkl_file, 'rb') as f:
             iso = pickle.load(f)
     else:
-        print("ERROR: Could not load data for " + iso_name)
+        print("ERROR: Could not load data for " + iso_name + " - This is usually caused by the gene list having a mis-spelling")
+        return None
     
     return iso

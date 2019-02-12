@@ -34,6 +34,10 @@ def write_output(ctl):
         ## load the isoform object
         iso = cor.load_isoform(ctl, iso_name)
 
+        ## hedge against the isoform not being there - will print an error though
+        if not iso:
+            continue
+
         ## function below
         results.append(result_line(iso, ctl))
 
