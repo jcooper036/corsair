@@ -41,7 +41,7 @@ def run_exonerate(ctl, iso_name):
             
             ## write the scaffold to a temporary file
             genome_path = ctl.genome_paths[species]
-            cor.shell('samtools faidx ' + genome_path + ' ' + scaffold + ' > ' + temp_dir + species + '_' + iso.name + '.fasta')
+            cor.shell('faidx ' + genome_path + ' ' + scaffold + ' > ' + temp_dir + species + '_' + iso.name + '.fasta')
 
             #exonerates through scaffold using input protein
             input_scaffold_file = temp_dir + species + '_' + iso.name + '.fasta'

@@ -1,8 +1,0 @@
-## local
-
-
-
-## python
-python3.6+
-os
-pickle

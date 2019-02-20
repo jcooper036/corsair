@@ -1,6 +1,7 @@
 # Corsair
 A python module for running Phylogenetic Analysis by Maximum Likeliehood (PAML, Yang 2005) on a genomic scale.
 v1.00
+jcooper036@gmail.com
 
 ## Installation
 
@@ -14,7 +15,6 @@ Corsair comes with several of the decencies it needs to run. So that the program
 
 Some programs need to be present locally. They should be available to install with brew or apt-get
 - blast (specifically tblastn)
-- samtools faidx
 - python3
 
 There are also some python packages that are requied, but are easy to find with pip. Hopefully we didn't miss any - if any "cannot find module" error pop up, try installing that python module.
@@ -22,6 +22,7 @@ There are also some python packages that are requied, but are easy to find with 
 - scipy
 - numpy
 - pickle
+- pyfaidx
 
 ## Pre-run requirements -- IMPORTANT!
 - Control file
@@ -35,7 +36,6 @@ cor.sample_ctl(file_name)
 - Parse reference CDS Fasta file and gene list
     - the reference CDS file needs to contain ONLY the gene or transcript name in the header
     - genes in the gene list must EXACTLY match a header in the fasta file
-    - for some tools to do this, see:
 
 - Genome names need to match the clade names in the tree, followed by '_', and need to end as .fasta
     - the genome name has to fit the exact (case sensitve) name give in the tree
@@ -54,6 +54,8 @@ import Corsair as cor
 ctl = cor.load_ctl('sample.ctl')
 cor.blast(ctl)
 ```
+
+There are several python scripts in the main directory that contain examples of how to string together the various commands.
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
