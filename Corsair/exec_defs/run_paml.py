@@ -25,7 +25,11 @@ def run_paml_M7M8(ctl, iso_name):
     cor.m7_m8_control_file(ctl, iso)
 
     ## run codeml
-    command = ctl.mod_path + 'Corsair/bin/paml/4.9e/bin/codeml ' + iso.paml_control_file(ctl)
+    if ctl.operating_system == 'mac':
+        paml_exec = ctl.mod_path + 'Corsair/bin/paml/4.9e/bin/codeml'
+    elif ctl.operating_system == 'linux':
+        paml_exec = 'codeml'
+    command = paml_exec + ' ' + iso.paml_control_file(ctl)
     cor.shell(command)
 
     ## remove all the files codeml leaves behind
@@ -61,7 +65,11 @@ def run_paml_M8M8a(ctl, iso_name):
     cor.m8_m8a_control_file(ctl, iso)
 
     ## run codeml
-    command = ctl.mod_path + 'Corsair/bin/paml/4.9e/bin/codeml ' + iso.paml_control_file(ctl)
+    if ctl.operating_system == 'mac':
+        paml_exec = ctl.mod_path + 'Corsair/bin/paml/4.9e/bin/codeml'
+    elif ctl.operating_system == 'linux':
+        paml_exec = 'codeml'
+    command = paml_exec + ' ' + iso.paml_control_file(ctl)
     cor.shell(command)
 
     ## remove all the files codeml leaves behind

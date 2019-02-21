@@ -11,7 +11,8 @@ def write_output(ctl):
     
     # header
     results = ['Gene'
-        + '\t' + 'Ensembl_ID'
+        + '\t' + 'Gene_Ensembl_ID'
+        + '\t' + 'Isoform_Ensembl_ID'
         + '\t' + 'Species'
         + '\t' + 'Reference_length(aa)'
         + '\t' + 'Percent_analyzed'
@@ -28,6 +29,9 @@ def write_output(ctl):
         + '\t' + 'BEB_sites'
     ]
 
+    ## load the ensembl ID list
+    ctl.load_ensembl()
+
     ## loop over each isoform
     for iso_name in ctl.gene_list:
 
@@ -37,6 +41,15 @@ def write_output(ctl):
         ## hedge against the isoform not being there - will print an error though
         if not iso:
             continue
+
+        #@ for testing, can remove
+        iso.gene_ensembl = False
+        iso.iso_ensembl = False
+
+        ## get the gene ensembl IDs
+        if iso_name in ctl.ensembl_table.keys():
+            iso.gene_ensembl = ctl.ensembl_table[iso_name]['gene_ensembl_ID']
+            iso.iso_ensembl = ctl.ensembl_table[iso_name]['iso_ensembl_ID']
 
         ## function below
         results.append(result_line(iso, ctl))
@@ -66,12 +79,18 @@ def result_line(iso, ctl):
     ## gene
     gene = iso.name + '\t'
     
-    ## ensembl ID
-    if iso.ensembl:
-        ensembl = iso.ensembl + '\t'
+    ## gene ensembl ID
+    if iso.gene_ensembl:
+        gene_ensembl = iso.gene_ensembl + '\t'
     else:
-        ensembl = '\t'
-    
+        gene_ensembl = '\t'
+
+    ## iso ensembl ID
+    if iso.iso_ensembl:
+        iso_ensembl = iso.iso_ensembl + '\t'
+    else:
+        iso_ensembl = '\t'
+
     ## species
     if iso.good_species:
         species = str(len(iso.good_species)) + '\t'
@@ -152,7 +171,8 @@ def result_line(iso, ctl):
     ## only do it this way for readability
     string = [
         gene
-        + ensembl
+        + gene_ensembl
+        + iso_ensembl
         + species
         + ref_len
         + percent

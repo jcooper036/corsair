@@ -14,7 +14,8 @@ class Isoform(object):
     def __init__(self, name):
         """constructor function"""
         self.name = name
-        self.ensembl = False
+        self.gene_ensembl = False
+        self.iso_ensembl = False
         self.blast_prot = {}
         self.alignment = {} # protein alignment with all good speices
         self.condensed_alignment = {} # protein alignment for each aligner with -, X, * removed
@@ -26,6 +27,7 @@ class Isoform(object):
         self.scaffolds = {} # species:scaffold, filled after blast
         self.good_species = [] # eventually filled with the species that have good sequences
         self.mask = False
+
 
         # will hold the results from PAML
         self.paml_results = {

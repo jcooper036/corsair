@@ -5,13 +5,18 @@ jcooper036@gmail.com
 
 ## Installation
 
+MAC users:
 Corsair comes with several of the decencies it needs to run. So that the program can be run in a distributed manner, the /bin/ of this module actually has all the depenecies.
-- mafft
 - Clustal Omega
 - Exonerate
 - Tcoffee
 - Muscle
 - paml
+
+Linux users:
+Corsair does not have the pre-compiled execs for linux. Run this command to install them:
+apt-get install -y python3 python3-pip emboss exonerate clustalo muscle t-coffee paml ncbi-blast+ nfs-common curl
+
 
 Some programs need to be present locally. They should be available to install with brew or apt-get
 - blast (specifically tblastn)

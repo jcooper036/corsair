@@ -10,6 +10,7 @@ class Ctlog():
         """constructor function"""
         self.file = file
         self.load_params()
+        self.operating_system = 'linux'
 
     def __repr__(self):
         """Print function for the class"""
@@ -77,6 +78,13 @@ class Ctlog():
                         self.scaffold_path = self.add_slash(self.scaffold_path)
                     except:
                         pass
+                
+                if "operating_system:" in line:
+                    self.operating_system = str(line.split(':')[1])
+
+                if "ensembl_file:" in line:
+                    self.ensembl_file = str(line.split(':')[1])
+
                            
         self.species_list(self.tree)
         self.find_genome_paths()
@@ -105,10 +113,29 @@ class Ctlog():
             gen = False
             for name in glob.glob(self.genome_path + genome + '_*.fasta'):
                 gen = name
+            ## this is used mostly for servers where the .fasta file wasn't imported in the blast section
             if not gen:
-                print('ERROR: Genome files could not be found. They must contain the species code followed by an underscore, and end in .fasta')
+                for name in glob.glob(self.genome_path + genome + '_*.fasta.*'):
+                    gen = name.split('.fasta.')[0]
+                    gen += '.fasta'               
+                if not gen:
+                    print('ERROR: Genome files could not be found. They must contain the species code followed by an underscore, and end in .fasta')
             self.genome_paths[genome] = gen
     
     def load_gene_list(self):
         """Actaully uses the gene list. This is here in case the gene list is set by other means"""
         self.gene_list = self.secret_gene_list
+    
+    def load_ensembl(self):
+        """Loads the ensembl csv, makes a dictionary for looking up info"""
+        self.ensembl_table = {}
+        with open(self.ensembl_file, 'r') as f:
+            for line in f:
+                if "gene_name" not in line:
+                    line = line.strip()
+                    lin = line.split(',')
+                    (gene,geneID,isoID) = lin[0], lin[1], lin[2]
+                    self.ensembl_table[lin[0]] = {
+                        'gene_ensembl_ID' : lin[1],
+                        'iso_ensembl_ID' : lin[2]
+                    }

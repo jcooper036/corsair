@@ -33,11 +33,25 @@ def run_alignment(ctl, iso_name):
 
         ## different commands based on aligner
         if aligner == 'clustal':
-            command = ctl.mod_path + 'Corsair/bin/clustal-omega/1.2.1/bin/clustalo -i ' + infile +' -o ' + outfile + ' --force'
+            if ctl.operating_system == 'mac':
+                clustal_exec = ctl.mod_path + 'Corsair/bin/clustal-omega/1.2.1/bin/clustalo'
+            elif ctl.operating_system == 'linux':
+                clustal_exec = 'clustalo'
+            command = clustal_exec + ' -i ' + infile +' -o ' + outfile + ' --force'
+        
         if aligner == 'tcoffee':
-            command = ctl.mod_path + 'Corsair/bin/t-coffee/10.00.r1613/bin/t_coffee ' + infile + ' -outfile ' + outfile + ' -multi_core -quiet -output=fasta'
+            if ctl.operating_system == 'mac':
+                tcoffee_exec = ctl.mod_path + 'Corsair/bin/t-coffee/10.00.r1613/bin/t_coffee'
+            elif ctl.operating_system == 'linux':
+                tcoffee_exec = 't_coffee'
+            command = tcoffee_exec + ' ' + infile + ' -outfile ' + outfile + ' -multi_core -quiet -output=fasta'
+        
         if aligner == 'muscle':
-            command = ctl.mod_path + 'Corsair/bin/muscle/3.8.1551/bin/muscle -quiet -in ' + infile + ' -out ' + outfile
+            if ctl.operating_system == 'mac':
+                muscle_exec = ctl.mod_path + 'Corsair/bin/muscle/3.8.1551/bin/muscle'
+            elif ctl.operating_system == 'linux':
+                muscle_exec = 'muscle'
+            command = muscle_exec + ' -quiet -in ' + infile + ' -out ' + outfile
         
         cor.shell(command)
         print('Sequences for ' + iso.name + ' aligned with ' + aligner + '.')

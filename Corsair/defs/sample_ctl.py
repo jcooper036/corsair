@@ -8,8 +8,12 @@ def sample_ctl(file):
         f.write(
             "### CTL Example file ###\n\n" +
             "## For all file paths, it is best to specify the absolute path. This is because things may be scattered in many directories\n\n"
+            "## operating system. default is linux, options are 'mac' or 'linux'. important for some execuatables\n"
+            "operating_system:mac\n\n"
+            "## ensembl file. This is the file where ensembl IDs are matched to gene names\n"
+            "ensembl_file:/Volumes/Corsair_ext/projects/primates_nine/cds_files/human_cds_ensemble.csv\n\n"
             "## module directory. this is where the corsair directory is, absolute path\n"
-            "corsair_directory:/Users/$USR_NAME/corsair/\n\n"
+            "corsair_directory:/Users/$USR_NAME/corsair/\n\n"            
             "## this is where all the files get stored. This does NOT have to be where the reference files are located, but any created files will go here\n" +
             "project_directory:/Users/$USR_NAME/corsair/primates/\n\n" +
             "## reference CDS file, must be a cleaned fasta file. See README for more info.\n" +
