@@ -51,10 +51,13 @@ def run_exonerate(ctl, iso_name):
             elif ctl.operating_system == 'linux':
                 exonerate_exec = 'exonerate'
             command = exonerate_exec + ' --model protein2genome --query ' + iso.protein_file(ctl) + ' --target ' + input_scaffold_file + ' --ryo "forcebeams \n>' + species + '\n%tcs\n" --bestn 1 > ' + results_file + '.txt'
-            cor.shell(command)
+            
+            if (os.path.isfile(input_scaffold_file)) and (os.path.isfile(iso.protein_file(ctl))):
+                cor.shell(command)
 
             #removes temporary scaffold (mitigating measure for parallel)
-            os.remove(input_scaffold_file)
+            if os.path.isfile(input_scaffold_file):
+                os.remove(input_scaffold_file)
 
     ## save the isoform object
     cor.save_isoform(ctl, iso)

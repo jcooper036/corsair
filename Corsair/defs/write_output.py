@@ -30,7 +30,8 @@ def write_output(ctl):
     ]
 
     ## load the ensembl ID list
-    ctl.load_ensembl()
+    if ctl.ensembl_file:
+        ctl.load_ensembl()
 
     ## loop over each isoform
     for iso_name in ctl.gene_list:
@@ -47,9 +48,10 @@ def write_output(ctl):
         iso.iso_ensembl = False
 
         ## get the gene ensembl IDs
-        if iso_name in ctl.ensembl_table.keys():
-            iso.gene_ensembl = ctl.ensembl_table[iso_name]['gene_ensembl_ID']
-            iso.iso_ensembl = ctl.ensembl_table[iso_name]['iso_ensembl_ID']
+        if ctl.ensembl_file:
+            if iso_name in ctl.ensembl_table.keys():
+                iso.gene_ensembl = ctl.ensembl_table[iso_name]['gene_ensembl_ID']
+                iso.iso_ensembl = ctl.ensembl_table[iso_name]['iso_ensembl_ID']
 
         ## function below
         results.append(result_line(iso, ctl))

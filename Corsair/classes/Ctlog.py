@@ -11,6 +11,7 @@ class Ctlog():
         self.file = file
         self.load_params()
         self.operating_system = 'linux'
+        self.ensembl_file = False
 
     def __repr__(self):
         """Print function for the class"""
@@ -84,8 +85,7 @@ class Ctlog():
 
                 if "ensembl_file:" in line:
                     self.ensembl_file = str(line.split(':')[1])
-
-                           
+             
         self.species_list(self.tree)
         self.find_genome_paths()
 
