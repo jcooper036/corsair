@@ -85,6 +85,8 @@ class Ctlog():
 
                 if "ensembl_file:" in line:
                     self.ensembl_file = str(line.split(':')[1])
+                    self.load_ensembl()
+                    print("Loaded Ensembl Table")
              
         self.species_list(self.tree)
         self.find_genome_paths()
@@ -134,7 +136,6 @@ class Ctlog():
                 if "gene_name" not in line:
                     line = line.strip()
                     lin = line.split(',')
-                    (gene,geneID,isoID) = lin[0], lin[1], lin[2]
                     self.ensembl_table[lin[0]] = {
                         'gene_ensembl_ID' : lin[1],
                         'iso_ensembl_ID' : lin[2]
