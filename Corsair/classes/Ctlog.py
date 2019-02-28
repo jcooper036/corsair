@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import glob
 import sys
+import os
 
 class Ctlog():
     """This class is the equivalent of a control file, holds all the parameters for
@@ -85,8 +86,9 @@ class Ctlog():
 
                 if "ensembl_file:" in line:
                     self.ensembl_file = str(line.split(':')[1])
-                    self.load_ensembl()
-                    print("Loaded Ensembl Table")
+                    if os.path.isfile(self.ensembl_file):
+                        self.load_ensembl()
+                        print("Loaded Ensembl Table")
              
         self.species_list(self.tree)
         self.find_genome_paths()

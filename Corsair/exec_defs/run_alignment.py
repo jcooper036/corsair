@@ -64,7 +64,7 @@ def run_alignment(ctl, iso_name):
 
         ## load the alignment as a dictionary into the isoform object
         iso.alignment[aligner] = cor.read_fasta(outfile)
-        
-        ## save the isoform object
-        cor.save_isoform(ctl, iso)
+
+    ## save the isoform object
+    cor.save_isoform(ctl, iso)
 

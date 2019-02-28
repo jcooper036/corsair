@@ -13,7 +13,7 @@ def load_species_sequences(ctl, iso_name):
 
     ## load in a sequence
     blast_sequences = {}
-    for species in ctl.species:
+    for species in iso.scaffolds:
         blast_sequences[species] = []
         exonerate_file = iso.iso_files(ctl) + species + '.txt'
         with open(exonerate_file, 'r') as f:

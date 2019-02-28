@@ -74,6 +74,12 @@ def trim_sequences(ctl, iso_name):
                     seq_mask[aligner].append(mask_counter[aligner])
                 seq_mask[aligner].append('-')
                 mask_counter[aligner] = 0
+        
+    ## rounds off the length that won't be seen if the ends lined up
+    for aligner in ['clustal', 'tcoffee', 'muscle']:
+        if mask_counter[aligner] > 0:
+            seq_mask[aligner].append(mask_counter[aligner])
+
 
     ## now we need to apply that mask to each sequence
     for aligner in ['clustal', 'tcoffee', 'muscle']:
@@ -88,7 +94,7 @@ def trim_sequences(ctl, iso_name):
                         idx += 1
                 else:
                     iso.trimming[aligner][species] += '-'
-    
+
     ## make a set of the indexes that we want to get rid of
     iso.mask = set()
     

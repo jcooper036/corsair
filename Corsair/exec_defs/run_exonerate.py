@@ -34,6 +34,10 @@ def run_exonerate(ctl, iso_name):
     cor.write_fasta(iso.protein_file(ctl), temp, [ctl.ref_species])
 
     ############ run exonerate
+    if not iso.scaffolds:
+        print("No scaffolds for " + str(iso.name))
+        return None
+    
     # iterate over the list of scaffolds from each species
     for species, scaffold in iso.scaffolds.items():
         if species != ctl.ref_species:
@@ -41,7 +45,8 @@ def run_exonerate(ctl, iso_name):
             
             ## write the scaffold to a temporary file
             genome_path = ctl.genome_paths[species]
-            cor.shell('faidx ' + genome_path + ' ' + scaffold + ' > ' + temp_dir + species + '_' + iso.name + '.fasta')
+            faidx_command = 'faidx ' + genome_path + ' ' + str(scaffold) + ' > ' + temp_dir + species + '_' + iso.name + '.fasta'
+            cor.shell(faidx_command)
 
             #exonerates through scaffold using input protein
             input_scaffold_file = temp_dir + species + '_' + iso.name + '.fasta'
