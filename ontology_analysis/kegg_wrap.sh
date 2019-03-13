@@ -1,6 +1,5 @@
 #! /usr/bin/env bash
 
-
 ## format the kegg file so we can use it
 python3 kegg_database_format.py hsa00001.keg
 
