@@ -4,14 +4,14 @@
 python3 kegg_database_format.py hsa00001.keg
 
 ## get the hit lists
-# hit_maker.py results_list.txt name_or_ID
-python3 hit_maker.py /Users/Jacob/Box/recurrent\ recurrent\ positive\ selection/190312_results/2019-03-05-10-40_Hsap_results.parsed.txt name
-python3 hit_maker.py /Users/Jacob/Box/recurrent\ recurrent\ positive\ selection/190312_results/2019-03-05-10-55_Hsap9_results.parsed.txt name
-python3 hit_maker.py /Users/Jacob/Box/recurrent\ recurrent\ positive\ selection/190312_results/2019-03-05-11-08_Mmus_results.parsed.txt ID
-python3 hit_maker.py /Users/Jacob/Box/recurrent\ recurrent\ positive\ selection/190312_results/2019-03-05-12-12_Pman_results.parsed.txt ID
-python3 hit_maker.py /Users/Jacob/Box/recurrent\ recurrent\ positive\ selection/190312_results/2019-03-05-12-28_Mluc_results.parsed.txt ID
-python3 hit_maker.py /Users/Jacob/Box/recurrent\ recurrent\ positive\ selection/190312_results/2019-03-05-12-49_Btau_results.parsed.txt ID
-python3 hit_maker.py /Users/Jacob/Box/recurrent\ recurrent\ positive\ selection/190312_results/2019-03-05-12-51_Clup_results.parsed.txt ID
+# hit_maker.py results_list.txt name_or_ID pvalue
+python3 hit_maker.py /Users/Jacob/Box/recurrent\ recurrent\ positive\ selection/190312_results/2019-03-05-10-40_Hsap_results.parsed.txt name 3.971721344030503e-06
+python3 hit_maker.py /Users/Jacob/Box/recurrent\ recurrent\ positive\ selection/190312_results/2019-03-05-10-55_Hsap9_results.parsed.txt name 4.064379775646237e-06
+python3 hit_maker.py /Users/Jacob/Box/recurrent\ recurrent\ positive\ selection/190312_results/2019-03-05-11-08_Mmus_results.parsed.txt ID 3.17017499365965e-06
+python3 hit_maker.py /Users/Jacob/Box/recurrent\ recurrent\ positive\ selection/190312_results/2019-03-05-12-12_Pman_results.parsed.txt ID 3.631345776744862e-06
+python3 hit_maker.py /Users/Jacob/Box/recurrent\ recurrent\ positive\ selection/190312_results/2019-03-05-12-28_Mluc_results.parsed.txt ID 4.305148958153952e-06
+python3 hit_maker.py /Users/Jacob/Box/recurrent\ recurrent\ positive\ selection/190312_results/2019-03-05-12-49_Btau_results.parsed.txt ID 1.5422578655151142e-05
+python3 hit_maker.py /Users/Jacob/Box/recurrent\ recurrent\ positive\ selection/190312_results/2019-03-05-12-51_Clup_results.parsed.txt ID 7.627765064836003e-06
 
 ## convert all the hit lists into human gene names
 # ortho_conversion.py hit_list.txt orthology_table.txt human_ensembles.csv

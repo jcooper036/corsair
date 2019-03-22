@@ -138,9 +138,19 @@ class Isoform(object):
         """Removes sequences that have stop codons in the middle of the sequence"""
         remove = []
         for species in self.blast_prot:
+            flag1 = True
             test = self.blast_prot[species].upper()[:-1]
-            if 'X' in test:
+            
+            ## if there are premature stop codons in the gene, remove it
+            ninetyfive = int(len(test) * 0.95)
+            if 'X' in test[:ninetyfive]:
+                flag1 = False
                 remove.append(species)
+            
+            ## if there are stops that are just a bit from the end, slice off the stop and everything after it
+            if 'X' in test[ninetyfive:] and flag1:
+                self.blast_prot[species] = self.blast_prot[species].split('X')[0]
+
         if len(remove) > 0:
             for species in remove:
                 self.blast_dic.pop(species)

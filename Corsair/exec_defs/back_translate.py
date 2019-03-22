@@ -20,9 +20,15 @@ def back_translate(ctl, iso_name):
 
     ## generate a list of all the indexed positions that do not have a *, -, or X in any sequence
     good_indexes = []
-    for i in range(len(aa_alignment[ctl.ref_species])):
+    
+    ## check for stop codons in the first 95%, delete if found
+    iterations = int(len(aa_alignment[ctl.ref_species]))
+    for i in range(iterations):
         if not any(aa_alignment[nkey][i] == "*" or aa_alignment[nkey][i] == "X" or aa_alignment[nkey][i] == "-" for nkey in aa_alignment):
             good_indexes.append(i)
+    
+    ## if there are any stop codons in the rest
+
     
     ## use those positions to build the new min sequences
     minaa = {}
